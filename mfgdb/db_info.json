@@ -1,0 +1,18 @@
+{
+    "MandatoryColumns" :[
+        "SerialNumber",
+        "RobotModel",
+        "FinalAssemblyNumber",
+        "FinalAssemblyRevision",
+        "FirmwareVersion",
+        "GUID",
+        "Operator",
+        "Date",
+        "Time",
+        "CalibrationData",
+        "TestResults",
+        "TestedBy",
+        "InspectionData",
+        "InspectedBy"
+    ]
+}
