@@ -1,3 +1,10 @@
 {
-    "$KEY_LIBROVER":"THIS IS A LARGE TEST VALUE"
+    "$KEY_LIBROVER": "https://github.com/roverrobotics/librover -b 3.0.0",
+    "$KEY_DS4_DRV": "https://github.com/naoki-mizuno/ds4drv --branch devel",
+    "$KEY_ROVER_TESTS": "https://github.com/RoverRobotics/Robottests -b main",
+    "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.0.0",
+    "$KEY_RPI_ROS": "https://github.com/Slamtec/rplidar_ros.git",
+    "$KEY_DS4_ROS": "https://github.com/naoki-mizuno/ds4_driver -b melodic-devel",
+    "$KEY_ROVER_STACK": "https://github.com/roverrobotics/roverrobotics_stack -b 1.1.2",
+    "$KEY_LAUNCH_CMDS": "roverrobotics_driver pro_teleop.launch"
 }
