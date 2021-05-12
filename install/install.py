@@ -1,6 +1,33 @@
 import json
 import os
 
+class RobotPackageInstaller():
+    def __init__(self, commands="shellscripts.json", variables="variables.json", playbooks="rover_models.json"):
+        
+        # loads all possible install commands
+        with open(commands, "r") as inputfile:
+            self.install_commands = json.load(inputfile)
+
+        # load all versioned variables
+        with open(variables, "r") as inputfile:
+            self.variables = json.load(inputfile)
+
+        # load all model-specific install "playbook"
+        with open(playbooks, "r") as inputfile:
+            self.playbooks = json.load(inputfile)
+
+    def set_model(self, model:str):
+        if model not in self.playbooks:
+            raise ValueError("Invalid robot model %s. No valid plan to install for %s" % (model, model))
+        
+        self.model = model
+
+
+    def run_install(self, logfile_location):
+        for play in self.playbooks[]
+
+
+
 with open("shellscripts.json", "r") as inputfile:
     data = json.load(inputfile)
 
