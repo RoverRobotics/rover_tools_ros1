@@ -1,0 +1,162 @@
+{
+    "install_prereq_scripts": [
+        {
+            "update-user-perms": "sudo usermod -aG dialout,sudo,input $USER",
+            "add-ros-source": [
+                "  sudo sh -c 'echo \"deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main\" > /etc/apt/sources.list.d/ros-latest.list' ",
+                "sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654",
+                "sudo apt-get update"
+            ],
+            "apt-install-utils": "sudo apt install git nano net-tools openssh-server ros-melodic-desktop python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential ros-melodic-serial ros-melodic-joy ros-melodic-twist-mux ros-melodic-tf2-geometry-msgs ros-melodic-robot-localization ros-melodic-gmapping ros-melodic-move-base -y",
+            "apt-remove-modemmanger": "sudo apt remove modemmanager -y",
+            "update-ros-dept": [
+                "sudo rosdep init",
+                "rosdep update"
+            ]
+        }
+    ],
+    "install_rover_ros_subsystem_files": [
+        {
+            "install_rover_ros_env": [
+                "cat << EOF1 | sudo tee /etc/roverrobotics/env.sh",
+                "#!/bin/sh",
+                "export ROS_HOSTNAME=$(hostname).local",
+                "export ROS_MASTER_URI=http://$(hostname).local:11311",
+                "EOF1"
+            ],
+            "install_rover_roscore": [
+                "cat << EOF2 | sudo tee /etc/systemd/system/roscore.service",
+                "[Unit]",
+                "After=NetworkManager.service time-sync.target",
+                "[Service]",
+                "Type=forking",
+                "User=$USER",
+                " ExecStart=/bin/sh -c \". /opt/ros/melodic/setup.sh; . /etc/roverrobotics/env.sh; roscore & while ! echo exit | nc localhost 11311 > /dev/null; do sleep 1; done\" ",
+                "[Install]",
+                "WantedBy=multi-user.target",
+                "EOF2"
+            ],
+            "install_rover_startup_service": [
+                "cat << EOF3 | sudo tee /etc/systemd/system/roverrobotics.service",
+                "[Unit]",
+                "Requires=roscore.service",
+                "PartOf=roscore.service",
+                "After=NetworkManager.service time-sync.target roscore.service",
+                "[Service]",
+                "Type=simple",
+                "User=$USER",
+                "ExecStart=/usr/sbin/roverrobotics",
+                "[Install]",
+                "WantedBy=multi-user.target",
+                "EOF3"
+            ]
+        }
+    ],
+    "install_ds4_linux_driver": [
+        {
+            "install_ds4_driver": [
+                "mkdir -p ~/drivers",
+                "cd ~/drivers",
+                "git clone $KEY_DS4_DRV ds4drv",
+                "cd ds4drv",
+                "mkdir -p ~/.local/lib/python2.7/site-packages",
+                "python2 setup.py install --prefix ~/.local",
+                "sudo cp -rf udev/50-ds4drv.rules /etc/udev/rules.d/"
+            ]
+        }
+    ],
+    "install_rover_test_repo": [
+        {
+            "install_test_repo": [
+                "mkdir -p ~/rover_test",
+                "cd ~/rover_test",
+                "git clone $KEY_ROVER_TESTS rover_robot_test",
+                "chmod +x rover_robot_test/"
+            ]
+        }
+    ],
+    "install_rpilidar_repo": [],
+    "install_rover_startup_script": [
+        {
+            "install_startup_script": [
+                "cat << \"EOF2\" | sudo tee /usr/sbin/roverrobotics",
+                "#!/bin/bash",
+                "source ~/catkin_ws/devel/setup.bash",
+                "source /etc/roverrobotics/env.sh",
+                "export ROS_HOME=$(echo /home/$USER)/.ros",
+                "roslaunch $KEY_LAUNCH_CMDS &",
+                "PID=$!",
+                "wait \"$PID\"",
+                "EOF2"
+            ]
+        }
+    ],
+    "install_librover_script": [
+        {
+            "install_librover": [
+                "mkdir -p ~/drivers",
+                "cd ~/drivers",
+                "git clone $KEY_LIBROVER librover",
+                "cd ~/drivers/librover",
+                "cmake .",
+                "sudo make install"
+            ]
+        }
+    ],
+    "install_can_service": [
+        {
+            "install_can": [
+                "cat << EOF6 | sudo tee /etc/systemd/system/can.service",
+                "[Unit]",
+                "After=NetworkManager.service time-sync.target roscore.service",
+                "[Service]",
+                "Type=simple",
+                "User=root",
+                "ExecStart=/enablecan.sh",
+                "[Install]",
+                "WantedBy=multi-user.target",
+                "EOF6",
+                "sudo systemctl enable can.service"
+            ],
+            "add_can_script": [
+                "cat << EOF7 | sudo tee /enablecan.sh",
+                "#!/bin/bash",
+                "sudo busybox devmem 0x0c303000 32 0x0000C400",
+                "sudo busybox devmem 0x0c303008 32 0x0000C458",
+                "sudo modprobe can",
+                "sudo modprobe can_raw",
+                "sudo modprobe mttcan",
+                "sudo ip link set can0 type can bitrate 500000 sjw 127 dbitrate 2000000 dsjw 15 berr-reporting on fd on",
+                "#sudo ip link set can1 type can bitrate 500000 dbitrate 2000000 berr-reporting on fd on",
+                "sudo ip link set up can0",
+                "#sudo ip link set up can1",
+                "EOF7",
+                "sudo chmod +x /enablecan.sh"
+            ]
+        }
+    ],
+    "install_rover_ros_package": [
+        {
+            "install_rpi_lidar": [
+                "mkdir -p ~/catkin_ws/src",
+                "cd ~/catkin_ws/src",
+                "git clone $KEY_RPI_ROS"
+            ],
+            "install_rover_ros_1": [
+                "mkdir -p ~/catkin_ws/src",
+                "cd ~/catkin_ws/src",
+                "git clone $KEY_ROVER_ROS1"
+            ],
+            "install_ds4_driver_ros1": [
+                "mkdir -p ~/catkin_ws/src",
+                "cd ~/catkin_ws/src",
+                "git clone $KEY_DS4_ROS"
+            ]
+        }
+    ],
+    "uninstall_scripts": [
+        {
+            "remove-catkin_ws": ""
+        }
+    ]
+}
