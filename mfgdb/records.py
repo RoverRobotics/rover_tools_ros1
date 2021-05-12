@@ -67,10 +67,13 @@ class ManufacturingRecordDb():
         )
 
         # validate that the item was pushed successfully
-        if self.get_robot_information(item_for_db['SerialNumber']) is not None:
+        confirmation = self.get_robot_information(item_for_db['SerialNumber'])
+        if confirmation is not None:
             print('Robot %s successfully added to manufacturing db' % item_for_db['SerialNumber'])
         else:
             print('Failed to add robot to manufacturing DB. Contact Engineering for help')
+
+        return confirmation
                 
 
 if __name__ == '__main__':
