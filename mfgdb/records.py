@@ -2,11 +2,8 @@ import boto3
 import os
 import json
 
-ACCESS_ID = "AKIAWVQQ3JAD4QMBRV6A"
-ACCESS_KEY = "XUEHHr5QTbsU6gN0IwUJ+8Iw2H1uXbC5ZJZWJ/kW"
-
 class ManufacturingRecordDb():
-    def __init__(self, access_id, access_key, db_info_path="config/db_info.json", table_name="ManufacturingRecords", region="us-west-2"):
+    def __init__(self, access_id, access_key, db_info_path="mfgdb/db_info.json", table_name="ManufacturingRecords", region="us-west-2"):
         
         # register input args
         self.access_id = access_id
@@ -74,10 +71,23 @@ class ManufacturingRecordDb():
             print('Failed to add robot to manufacturing DB. Contact Engineering for help')
 
         return confirmation
+
+    def get_local_credentials(credential_file="mfgdb/credentials.json"):
+        try:
+            with open(credential_file, "r") as read_file:
+                credentials = json.load(read_file)
+
+            return credentials["ACCESS_ID"], credentials["ACCESS_KEY"]
+        except IOError as e:
+            print('Unable to find local credentials with error %s' % e)
+            return None, None
+
+
                 
 
 if __name__ == '__main__':
-    db = ManufacturingRecordDb(ACCESS_ID, ACCESS_KEY)
+    access_id, access_key = ManufacturingRecordDb.get_local_credentials()
+    db = ManufacturingRecordDb(access_id, access_key)
     db.get_robot_information("000000")
     db.register_new_robot(
         {
