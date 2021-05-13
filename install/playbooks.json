@@ -1,4 +1,5 @@
 {
-    "pro":["install_prereq_scripts"],
+    "pro":["install_prereq_scripts", "install_can_service", "install_librover_script", "install_rover_startup_script"],
+    "test":["install_can_service", "install_rover_ros_package"],
     "zero":["install_something"]
 }

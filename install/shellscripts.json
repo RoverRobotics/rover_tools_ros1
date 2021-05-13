@@ -3,7 +3,7 @@
         {
             "update-user-perms": "sudo usermod -aG dialout,sudo,input $USER",
             "add-ros-source": [
-                "echo \"deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main\" > /etc/apt/sources.list.d/ros-latest.list",
+                "sudo sh -c 'echo \"deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main\" > /etc/apt/sources.list.d/ros-latest.list'",
                 "sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654",
                 "sudo apt-get update"
             ],
@@ -139,22 +139,22 @@
         {
             "install_rpi_lidar": [
                 "mkdir -p ~/catkin_ws/src",
-                "cd ~/catkin_ws/src",
+                "cd ~/catkin_ws/src/",
                 "git clone $KEY_RPI_ROS"
             ],
             "install_rover_ros_1": [
                 "mkdir -p ~/catkin_ws/src",
-                "cd ~/catkin_ws/src",
+                "cd ~/catkin_ws/src/",
                 "git clone $KEY_ROVER_ROS1"
             ],
             "install_ds4_driver_ros1": [
                 "mkdir -p ~/catkin_ws/src",
-                "cd ~/catkin_ws/src",
+                "cd ~/catkin_ws/src/",
                 "git clone $KEY_DS4_ROS"
             ],
             "install_rover_stack": [
                 "mkdir -p ~/catkin_ws/src",
-                "cd ~/catkin_ws/src",
+                "cd ~/catkin_ws/src/",
                 "git clone $KEY_ROVER_STACK"
 
             ]
