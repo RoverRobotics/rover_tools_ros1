@@ -1,4 +1,4 @@
 credentials*
-__init__.*
+__init__.pyc
 *.vscode*
 __pycache__
