@@ -2,9 +2,6 @@ import boto3
 import os
 import json
 
-ACCESS_ID = "AKIAWVQQ3JAD4QMBRV6A"
-ACCESS_KEY = "XUEHHr5QTbsU6gN0IwUJ+8Iw2H1uXbC5ZJZWJ/kW"
-
 class ManufacturingRecordDb():
     def __init__(self, access_id, access_key, db_info_path="mfgdb/db_info.json", table_name="ManufacturingRecords", region="us-west-2"):
         
@@ -89,7 +86,8 @@ class ManufacturingRecordDb():
                 
 
 if __name__ == '__main__':
-    db = ManufacturingRecordDb(ACCESS_ID, ACCESS_KEY)
+    access_id, access_key = ManufacturingRecordDb.get_local_credentials()
+    db = ManufacturingRecordDb(access_id, access_key)
     db.get_robot_information("000000")
     db.register_new_robot(
         {
