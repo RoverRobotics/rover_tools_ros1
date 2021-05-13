@@ -34,12 +34,9 @@ class RobotPackageInstaller():
         return command
 
     def run_install(self, logfile_location="test.log"):
-        # password = input("Please enter your password: ")
-        # print ("starting install....")
-
         # open a master install log
         fout = open(logfile_location,'wb')
-        # fout.close()
+        fout.close()
 
         for play in self.playbooks[self.model]:
             for command_set in self.install_commands[play]:
