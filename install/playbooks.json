@@ -1,5 +1,34 @@
 {
-    "pro":["install_prereq_scripts", "install_can_service", "install_librover_script", "install_rover_startup_script"],
-    "test":["install_can_service", "install_rover_ros_package"],
-    "zero":["install_something"]
+    "pro_ros1": [
+        "install_prereq_scripts",
+        "install_rover_ros_subsystem_files",
+        "install_ds4_linux_driver",
+        "install_rover_ros1",
+        "install_can_service",
+        "install_rpilidar_repo",
+        "install_rover_test_repo",
+        "catkin_make",
+        "install_rover_startup_script"
+    ],
+    "zero_ros1": [
+        "install_prereq_scripts",
+        "install_rover_ros_subsystem_files",
+        "install_rover_stack",
+        "install_ds4_linux_driver",
+        "install_rpilidar_repo",
+        "install_rover_test_repo",
+        "catkin_make",
+        "install_rover_startup_script"
+    ],
+    "mini_ros1": [
+        "install_prereq_scripts",
+        "install_rover_ros_subsystem_files",
+        "install_ds4_linux_driver",
+        "install_rover_ros1",
+        "install_can_service",
+        "install_rpilidar_repo",
+        "install_rover_test_repo",
+        "catkin_make",
+        "install_rover_startup_script"
+    ]
 }
