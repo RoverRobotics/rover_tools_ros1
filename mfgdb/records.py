@@ -3,7 +3,14 @@ import os
 import json
 
 class ManufacturingRecordDb():
-    def __init__(self, access_id, access_key, db_info_path="mfgdb/db_info.json", table_name="ManufacturingRecords", region="us-west-2"):
+    def __init__(
+        self, 
+        access_id, 
+        access_key, 
+        db_info_path=(os.path.dirname(__file__) + "/db_info.json"), 
+        table_name="ManufacturingRecords", 
+        region="us-west-2"
+    ):
         
         # register input args
         self.access_id = access_id
@@ -72,7 +79,7 @@ class ManufacturingRecordDb():
 
         return confirmation
 
-    def get_local_credentials(credential_file="mfgdb/credentials.json"):
+    def get_local_credentials(credential_file=(os.path.dirname(__file__) + "/credentials.json")):
         try:
             with open(credential_file, "r") as read_file:
                 credentials = json.load(read_file)
@@ -81,6 +88,20 @@ class ManufacturingRecordDb():
         except IOError as e:
             print('Unable to find local credentials with error %s' % e)
             return None, None
+
+    def test_credentials(access_id, access_key):
+        os.environ['AWS_DEFAULT_REGION'] = "us-west-2"
+        sts = boto3.client(
+            'sts',
+            aws_access_key_id = access_id,
+            aws_secret_access_key = access_key
+        )
+        try:
+            sts.get_caller_identity()
+        except boto3.exceptions.ClientError:
+            return False
+
+        return True
 
 
                 
