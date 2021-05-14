@@ -100,7 +100,7 @@
                 "source ~/catkin_ws/devel/setup.bash",
                 "source /etc/roverrobotics/env.sh",
                 "export ROS_HOME=$(echo /home/$USER)/.ros",
-                "roslaunch $KEY_LAUNCH_CMDS &",
+                "roslaunch placeholder &",
                 "PID=$!",
                 "wait \"$PID\"",
                 "EOF2"
@@ -153,6 +153,34 @@
                 "cd ~/drivers/librover",
                 "cmake .",
                 "sudo make install"
+            ]
+        }
+    ],
+    "setup_launch_pro": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_PRO_LAUNCH/g' /usr/sbin/roverrobotics"
+            ]
+        }
+    ],
+    "setup_launch_pro2": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics"
+            ]
+        }
+    ],
+    "setup_launch_mini": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics"
+            ]
+        }
+    ],
+    "setup_launch_zero2": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics"
             ]
         }
     ],
