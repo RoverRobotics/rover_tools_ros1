@@ -33,6 +33,13 @@ class RobotPackageInstaller():
                 command = command.replace(var, self.variables[var])
         return command
 
+    def get_models(self):
+        models = []
+        for model in self.playbooks:
+            models.append(model)
+        return models
+            
+    
     def run_install(self, logfile_location="temp.log"):
         # open a master install log
         fout = open(logfile_location,'wb')
@@ -71,4 +78,6 @@ class RobotPackageInstaller():
 if __name__ == "__main__":
     install = RobotPackageInstaller()
     install.set_model('mini_ros1')
-    install.run_install()
+    # print(install.get_models())
+    # install.run_install()
+

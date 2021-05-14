@@ -8,7 +8,8 @@
         "install_rpilidar_repo",
         "install_rover_test_repo",
         "catkin_make",
-        "install_rover_startup_script"
+        "install_rover_startup_script",
+        "setup_launch_pro"
     ],
     "zero_ros1": [
         "install_prereq_scripts",
@@ -18,7 +19,8 @@
         "install_rpilidar_repo",
         "install_rover_test_repo",
         "catkin_make",
-        "install_rover_startup_script"
+        "install_rover_startup_script",
+        "setup_launch_zero"
     ],
     "mini_ros1": [
         "install_prereq_scripts",
@@ -29,6 +31,19 @@
         "install_rpilidar_repo",
         "install_rover_test_repo",
         "catkin_make",
-        "install_rover_startup_script"
-    ]
+        "install_rover_startup_script",
+        "setup_launch_mini"
+    ],
+    "pro2_ros1": [
+        "install_prereq_scripts",
+        "install_rover_ros_subsystem_files",
+        "install_ds4_linux_driver",
+        "install_rover_ros1",
+        "install_can_service",
+        "install_rpilidar_repo",
+        "install_rover_test_repo",
+        "catkin_make",
+        "install_rover_startup_script",
+        "setup_launch_mini"
+    ],
 }
