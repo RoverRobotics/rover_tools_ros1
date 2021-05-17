@@ -51,7 +51,8 @@ class RobotPackageInstaller():
         fout = open(logfile_location,'wb')
         fout.close()
 
-        for play in self.playbooks[self.model]:
+        for index ,play in enumerate(self.playbooks[self.model]):
+            print("Running install set %d of %d" % (index+1, len(self.playbooks[self.model])), end=" ")
             for command_set in self.install_commands[play]:
                 for command_category, commands in command_set.items():
                     fout = open(logfile_location,'a')
@@ -69,7 +70,7 @@ class RobotPackageInstaller():
                             temp_bash.write(command+'\n')
                             fout.write(command + "\r\n")
 
-                    print("Running install command. Standby.")
+                    print(".", end="")
                     fout.write("#Terminal Output \r\n")
                     os.chmod("temp.sh", stat.S_IROTH | stat.S_IWOTH | stat.S_IXOTH | stat.S_IRUSR | stat.S_IWUSR |  stat.S_IXUSR)
                     output = Popen("%s" % ("/bin/bash temp.sh"), shell=True, stdout=PIPE, stderr=PIPE)
@@ -80,7 +81,9 @@ class RobotPackageInstaller():
                     fout.write(stdout)
                     fout.write(stderr)
                     # fout.writelines(output)
+            print("")
         print ("Finished running install playbook.")
+        input("Press Enter to Continue")
         
 
 if __name__ == "__main__":
