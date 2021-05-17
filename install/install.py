@@ -6,7 +6,12 @@ from subprocess import PIPE, Popen
 import pexpect
 import sys
 class RobotPackageInstaller():
-    def __init__(self, commands="shellscripts.json", variables="variables.json", playbooks="playbooks.json"):
+    def __init__(
+        self, 
+        commands=(os.path.dirname(__file__) + "/shellscripts.json"), 
+        variables=(os.path.dirname(__file__) + "/variables.json"), 
+        playbooks=(os.path.dirname(__file__) + "/playbooks.json")
+    ):
 
         # loads all possible install commands
         with open(commands, "r") as inputfile:
@@ -33,14 +38,16 @@ class RobotPackageInstaller():
                 command = command.replace(var, self.variables[var])
         return command
 
-    def get_models(self):
-        models = []
-        for model in self.playbooks:
-            models.append(model)
+    def get_models(playbooks=(os.path.dirname(__file__) + "/playbooks.json")):
+        with open(playbooks, "r") as playbook_file:
+            models = json.load(playbook_file).keys()
         return models
             
     
-    def run_install(self, logfile_location="temp.log"):
+    def run_install(self, logfile_location=os.path.dirname(__file__) + "/temp.log", model=None):
+        if model is not None:
+            self.set_model(model)
+        
         # open a master install log
         fout = open(logfile_location,'wb')
         fout.close()

@@ -112,7 +112,7 @@ if __name__ == '__main__':
     db.get_robot_information("000000")
     db.register_new_robot(
         {
-            "SerialNumber":"123456",
+            "SerialNumber":"123457",
             "RobotModel":"Mini",
             "FinalAssemblyNumber":"A700-FOOBAR",
             "FinalAssemblyRevision":"ZZZZZ",

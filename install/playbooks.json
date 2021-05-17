@@ -45,5 +45,5 @@
         "catkin_make",
         "install_rover_startup_script",
         "setup_launch_mini"
-    ],
+    ]
 }
