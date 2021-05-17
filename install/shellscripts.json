@@ -219,6 +219,8 @@
     "start_rover_ros1_services": [
         {
             "start_services":[
+                "source /opt/ros/melodic/setup.bash",
+                "source ~/catkin_ws/devel/setup.bash",
                 "sudo systemctl start roverrobotics.service"
             ]
         }
