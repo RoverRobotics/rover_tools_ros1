@@ -219,7 +219,7 @@
     "start_rover_ros1_services": [
         {
             "start_services":[
-                "sudo systemctl start roverrobotics.services"
+                "sudo systemctl start roverrobotics.service"
             ]
         }
     ],
