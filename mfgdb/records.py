@@ -101,8 +101,8 @@ class ManufacturingRecordDb():
                 credentials = json.load(read_file)
 
             return credentials["ACCESS_ID"], credentials["ACCESS_KEY"]
-        except IOError as e:
-            print('Unable to find local credentials with error %s' % e)
+        except:
+            print('Unable to find local credentials')
             return None, None
 
     def test_credentials(access_id, access_key):
@@ -114,7 +114,7 @@ class ManufacturingRecordDb():
         )
         try:
             sts.get_caller_identity()
-        except boto3.exceptions.ClientError:
+        except:
             return False
 
         return True

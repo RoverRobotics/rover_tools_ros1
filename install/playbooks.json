@@ -25,7 +25,7 @@
         "start_rover_ros1_services"
     ],
     "mini_ros1": [
-        "prereq_scripts",
+        "prereq",
         "rover_ros_subsystem_files",
         "ds4",
         "roverrobotics_ros1",
@@ -38,7 +38,7 @@
         "start_rover_ros1_services"
     ],
     "pro2_ros1": [
-        "prereq_scripts",
+        "prereq",
         "rover_ros_subsystem_files",
         "ds4",
         "rover_ros1",

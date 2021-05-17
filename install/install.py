@@ -3,7 +3,6 @@ import json
 import os, stat
 # import subprocess
 from subprocess import PIPE, Popen
-import pexpect
 import sys
 class RobotPackageInstaller():
     def __init__(
