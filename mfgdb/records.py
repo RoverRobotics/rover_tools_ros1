@@ -28,6 +28,13 @@ class ManufacturingRecordDb():
             aws_secret_access_key = self.access_key
         )
 
+        # create the filestore resource (for logs)
+        self.s3 = boto3.client(
+            's3',
+            aws_access_key_id = self.access_id,
+            aws_secret_access_key = self.access_key
+        )
+
         # create the table object
         self.table = self.dynamodb.Table(self.table_name)
 
@@ -56,7 +63,7 @@ class ManufacturingRecordDb():
 
         return response['Item']
 
-    def register_new_robot(self, item_for_db:dict):
+    def register_robot(self, item_for_db:dict):
         
         # ensure that all the required columns are present
         for col in self.db_mandatory_cols:
@@ -78,6 +85,15 @@ class ManufacturingRecordDb():
             print('Failed to add robot to manufacturing DB. Contact Engineering for help')
 
         return confirmation
+
+    def publish_install_log(self, logfile_path:str, serial_number:str):
+        try:
+            response = self.s3.upload_file(logfile_path, "install-logs", serial_number + ".log")
+        except:
+            print(response)
+            return False
+
+        return True
 
     def get_local_credentials(credential_file=(os.path.dirname(__file__) + "/credentials.json")):
         try:
@@ -110,7 +126,7 @@ if __name__ == '__main__':
     access_id, access_key = ManufacturingRecordDb.get_local_credentials()
     db = ManufacturingRecordDb(access_id, access_key)
     db.get_robot_information("000000")
-    db.register_new_robot(
+    db.register_robot(
         {
             "SerialNumber":"123457",
             "RobotModel":"Mini",

@@ -2,7 +2,7 @@
 import sys
 import os
 sys.path.append(os.path.join(sys.path[0], "../"))
-sys.path.append(os.path.join(sys.path[0], "../", "installer"))
+sys.path.append(os.path.join(sys.path[0], "../", "install"))
 sys.path.append(os.path.join(sys.path[0], "../", "mfgdb"))
 sys.path.append(os.path.join(sys.path[0], "../", "test"))
 print(sys.path)
@@ -18,6 +18,7 @@ with open(os.path.dirname(__file__) + "/menu_version.json", "r") as version_file
 
 # determine if this should be the internal or the external version of the tool
 launch_production_menu = ManufacturingRecordDb.test_credentials(*ManufacturingRecordDb.get_local_credentials())
+mfgdb = None if not launch_production_menu else ManufacturingRecordDb(*ManufacturingRecordDb.get_local_credentials())
 
 # get a list of all the models
 robots = RobotPackageInstaller.get_models()
@@ -31,7 +32,18 @@ else:
 # install_functions
 installer = RobotPackageInstaller()
 install_submenu = ConsoleMenu("Select Model")
-install_functions = [FunctionItem(robot, installer.run_install, kwargs={"model":robot}) for robot in robots]
+
+# end to end install
+def installer_main(model:str):
+    device_serial_number = input("Enter serial number: ")
+    installer.run_install(model=model)
+    if mfgdb is not None:
+        print(os.path.dirname(__file__)+"/../install/install.log")
+        if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
+            raise ValueError('Failed to publish install log to cloud. Halting.')
+
+
+install_functions = [FunctionItem(robot, installer_main, kwargs={"model":robot}) for robot in robots]
 for func in install_functions:
     install_submenu.append_item(func)
 
