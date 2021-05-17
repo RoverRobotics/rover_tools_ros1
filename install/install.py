@@ -44,7 +44,7 @@ class RobotPackageInstaller():
         return models
             
     
-    def run_install(self, logfile_location=os.path.dirname(__file__) + "/temp.log", model=None):
+    def run_install(self, logfile_location=os.path.dirname(__file__) + "/install.log", model=None):
         if model is not None:
             self.set_model(model)
         
@@ -70,7 +70,7 @@ class RobotPackageInstaller():
                             temp_bash.write(command+'\n')
                             fout.write(command + "\r\n")
 
-                    print(os.getcwd())
+                    print("Running install command. Standby.")
                     fout.write("#Terminal Output \r\n")
                     os.chmod("temp.sh", stat.S_IROTH | stat.S_IWOTH | stat.S_IXOTH | stat.S_IRUSR | stat.S_IWUSR |  stat.S_IXUSR)
                     output = Popen("%s" % ("/bin/bash temp.sh"), shell=True, stdout=PIPE, stderr=PIPE)
@@ -81,6 +81,8 @@ class RobotPackageInstaller():
                     fout.write(stdout)
                     fout.write(stderr)
                     # fout.writelines(output)
+        print ("Finished running install playbook.")
+        
 
 if __name__ == "__main__":
     install = RobotPackageInstaller()
