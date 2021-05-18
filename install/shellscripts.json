@@ -78,7 +78,7 @@
             "download_ds4_driver_ros1": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_DS4_ROS",
+                "git clone $KEY_DS4_ROS $KEYV_DS4_ROS",
                 "if [ -d ~/catkin_ws/src/$KEYV_DS4_ROS ]",
                 "then",
                 "    echo \"download_ds4_driver_ros1: Success\" >> $KEY_VERIFICATION_FILE",
@@ -125,7 +125,7 @@
             "download_rpi_lidar": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_RPI_ROS",
+                "git clone $KEY_RPI_ROS $KEYV_RPI_ROS",
                 "if [ -d ~/catkin_ws/src/$KEYV_RPI_ROS ]",
                 "then",
                 "    echo \"rpilidar_repo: Success\" >> $KEY_VERIFICATION_FILE",
@@ -207,7 +207,7 @@
                 "sudo modprobe mttcan",
                 "sudo ip link set can0 type can bitrate 500000 sjw 127 dbitrate 2000000 dsjw 15 berr-reporting on fd on",
                 "sudo ip link set up can0",
-                "if [ ifconfig | grep -q can0 ]",
+                "if ifconfig | grep -q can0 ",
                 "then",
                 "    echo \"enable_can_once: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -221,7 +221,7 @@
             "download_roverrobotics_ros1": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_ROVER_ROS1",
+                "git clone $KEY_ROVER_ROS1 $KEYV_ROVER_ROS1",
                 "if [ -d ~/catkin_ws/src/$KEYV_ROVER_ROS1 ]",
                 "then",
                 "    echo \"download_roverrobotics_ros1: Success\" >> $KEY_VERIFICATION_FILE",
@@ -232,7 +232,7 @@
             "download_librover": [
                 "mkdir -p ~/drivers",
                 "cd ~/drivers",
-                "git clone $KEY_LIBROVER librover",
+                "git clone $KEY_LIBROVER $KEYV_LIBROVER",
                 "if [ -d ~/catkin_ws/src/$KEYV_LIBROVER ]",
                 "then",
                 "    echo \"download_librover: Success\" >> $KEY_VERIFICATION_FILE",
@@ -270,7 +270,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if [ cat /usr/sbin/roverrobotics | grep $KEY_PRO2_LAUNCH ]",
+                "if grep $KEY_PRO2_LAUNCH /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -283,7 +283,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if [ cat /usr/sbin/roverrobotics | grep $KEY_MINI_LAUNCH ]",
+                "if grep $KEY_MINI_LAUNCH /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -297,7 +297,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if [ cat /usr/sbin/roverrobotics | grep $KEY_ZERO2_LAUNCH ]",
+                "if grep $KEY_ZERO2_LAUNCH /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -333,7 +333,7 @@
             "download_rover_stack": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_ROVER_STACK",
+                "git clone $KEY_ROVER_STACK $KEYV_ROVER_STACK",
                 "if [ -d ~/catkin_ws/src/$KEYV_ROVER_STACK ]",
                 "then",
                 "    echo \"download_rover_stack: Success\" >> $KEY_VERIFICATION_FILE",
