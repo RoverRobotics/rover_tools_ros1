@@ -109,9 +109,9 @@
             "download_test_repo": [
                 "mkdir -p ~/rover_test",
                 "cd ~/rover_test",
-                "git clone $KEY_ROVER_TESTS rover_robot_test",
-                "chmod +x ~/rover_robot_test/",
-                "if [ -d ~/rover_robot_test ]",
+                "git clone $KEY_ROVER_TESTS $KEYV_ROVER_TESTS",
+                "chmod +x ~/$KEYV_ROVER_TESTS/",
+                "if [ -d ~/$KEYV_ROVER_TESTS ]",
                 "then",
                 "    echo \"download_test_repo: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -257,7 +257,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_PRO_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if [ cat /usr/sbin/roverrobotics | grep $KEY_PRO_LAUNCH ]",
+                "if grep $KEY_PRO_LAUNCH /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",

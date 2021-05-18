@@ -5,7 +5,6 @@
         "ds4",
         "rover_udev",
         "roverrobotics_ros1",
-        "can_service",
         "rpilidar_repo",
         "rover_test_repo",
         "catkin_make",
