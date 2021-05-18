@@ -23,7 +23,13 @@
                 "#!/bin/sh",
                 "export ROS_HOSTNAME=$(hostname).local",
                 "export ROS_MASTER_URI=http://$(hostname).local:11311",
-                "EOF1"
+                "EOF1",
+                "if [ -f /etc/roverrobotics/env.sh ]",
+                "then",
+                "    echo \"create_rover_ros_env: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_rover_ros_env: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ],
             "create_rover_roscore": [
                 "cat << EOF2 | sudo tee /etc/systemd/system/roscore.service",
@@ -36,7 +42,13 @@
                 "[Install]",
                 "WantedBy=multi-user.target",
                 "EOF2",
-                "sudo systemctl enable roscore.service"
+                "sudo systemctl enable roscore.service",
+                "if [ -f /etc/systemd/system/roscore.service ]",
+                "then",
+                "    echo \"create_rover_roscore: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_rover_roscore: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ],
             "create_rover_startup_service": [
                 "cat << EOF3 | sudo tee /etc/systemd/system/roverrobotics.service",
@@ -51,8 +63,13 @@
                 "[Install]",
                 "WantedBy=multi-user.target",
                 "EOF3",
-                "sudo chmod +x /usr/sbin/roverrobotics",
-                "sudo systemctl enable roverrobotics.service"
+                "sudo systemctl enable roverrobotics.service",
+                "if [ -f /etc/systemd/system/roverrobotics.service ]",
+                "then",
+                "    echo \"create_rover_startup_service: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_rover_startup_service: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
@@ -61,7 +78,13 @@
             "download_ds4_driver_ros1": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_DS4_ROS"
+                "git clone $KEY_DS4_ROS",
+                "if [ -d ~/catkin_ws/src/$KEYV_DS4_ROS ]",
+                "then",
+                "    echo \"download_ds4_driver_ros1: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"download_ds4_driver_ros1: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ],
             "install_ds4_driver": [
                 "mkdir -p ~/drivers",
@@ -71,7 +94,13 @@
                 "mkdir -p ~/.local/lib/python2.7/site-packages",
                 "python2 setup.py install --prefix ~/.local",
                 "sudo cp -rf udev/50-ds4drv.rules /etc/udev/rules.d/",
-                "sudo udevadm control --reload-rules && sudo udevadm trigger"
+                "sudo udevadm control --reload-rules && sudo udevadm trigger",
+                "if [ -f ~/.local/bin/ds4drv ]",
+                "then",
+                "    echo \"install_ds4_driver: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"install_ds4_driver: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
@@ -81,7 +110,13 @@
                 "mkdir -p ~/rover_test",
                 "cd ~/rover_test",
                 "git clone $KEY_ROVER_TESTS rover_robot_test",
-                "chmod +x rover_robot_test/"
+                "chmod +x ~/rover_robot_test/",
+                "if [ -d ~/rover_robot_test ]",
+                "then",
+                "    echo \"download_test_repo: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"download_test_repo: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
@@ -90,7 +125,13 @@
             "download_rpi_lidar": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_RPI_ROS"
+                "git clone $KEY_RPI_ROS",
+                "if [ -d ~/catkin_ws/src/$KEYV_RPI_ROS ]",
+                "then",
+                "    echo \"rpilidar_repo: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"rpilidar_repo: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
@@ -105,7 +146,14 @@
                 "roslaunch placeholder &",
                 "PID=$!",
                 "wait \"$PID\"",
-                "EOF2"
+                "EOF2",
+                "sudo chmod +x /usr/sbin/roverrobotics",
+                "if [ -f /usr/sbin/roverrobotics ]",
+                "then",
+                "    echo \"create_startup_script: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_startup_script: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
@@ -122,7 +170,13 @@
                 "[Install]",
                 "WantedBy=multi-user.target",
                 "EOF6",
-                "sudo systemctl enable can.service"
+                "sudo systemctl enable can.service",
+                "if [ -f /etc/systemd/system/can.service ]",
+                "then",
+                "    echo \"create_can_service: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_can_service: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ],
             "create_can_script": [
                 "cat << EOF7 | sudo tee /enablecan.sh",
@@ -137,7 +191,13 @@
                 "sudo ip link set up can0",
                 "#sudo ip link set up can1",
                 "EOF7",
-                "sudo chmod +x /enablecan.sh"
+                "sudo chmod +x /enablecan.sh",
+                "if [ -f /enablecan.sh ]",
+                "then",
+                "    echo \"create_can_script: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_can_script: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ],
             "enable_can_once": [
                 "sudo busybox devmem 0x0c303000 32 0x0000C400",
@@ -146,7 +206,13 @@
                 "sudo modprobe can_raw",
                 "sudo modprobe mttcan",
                 "sudo ip link set can0 type can bitrate 500000 sjw 127 dbitrate 2000000 dsjw 15 berr-reporting on fd on",
-                "sudo ip link set up can0"
+                "sudo ip link set up can0",
+                "if [ ifconfig | grep -q can0 ]",
+                "then",
+                "    echo \"enable_can_once: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"enable_can_once: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
@@ -163,47 +229,86 @@
                 "    echo \"download_roverrobotics_ros1: Failure\" >> $KEY_VERIFICATION_FILE",
                 "fi"
             ],
-            "install_librover": [
+            "download_librover": [
                 "mkdir -p ~/drivers",
                 "cd ~/drivers",
                 "git clone $KEY_LIBROVER librover",
+                "if [ -d ~/catkin_ws/src/$KEYV_LIBROVER ]",
+                "then",
+                "    echo \"download_librover: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"download_librover: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+            ],
+            "install_librover": [
                 "cd ~/drivers/librover",
                 "cmake .",
-                "sudo make install"
+                "sudo make install",
+                "if [ -f /usr/lib/liblibrover.so ]",
+                "then",
+                "    echo \"install_librover: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"install_librover: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
     "setup_launch_pro": [
         {
             "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_PRO_LAUNCH/g' /usr/sbin/roverrobotics"
+                "sudo sed -i 's/placeholder/$KEY_PRO_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if [ cat /usr/sbin/roverrobotics | grep $KEY_PRO_LAUNCH ]",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
     "setup_launch_pro2": [
         {
             "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics"
+                "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if [ cat /usr/sbin/roverrobotics | grep $KEY_PRO2_LAUNCH ]",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
     "setup_launch_mini": [
         {
             "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics"
+                "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if [ cat /usr/sbin/roverrobotics | grep $KEY_MINI_LAUNCH ]",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+                
             ]
         }
     ],
     "setup_launch_zero2": [
         {
             "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics"
+                "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if [ cat /usr/sbin/roverrobotics | grep $KEY_ZERO2_LAUNCH ]",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
     "rover_udev": [
         {
-            "udev": [
+            "create_udev": [
                 "cat << EOF8 | sudo tee /etc/udev/rules.d/55-roverrobotics",
                 "#creates fixed name for rover serial communication",
                 "#rover zero",
@@ -212,7 +317,14 @@
                 "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverZeroV2\", MODE:=\"0777\", SYMLINK+=\"rover-zero-v2\", RUN+=\"/bin/setserial /dev/%k low_latency\" ",
                 "# rover pro",
                 "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverPro\", MODE:=\"0777\", SYMLINK+=\"rover-pro\", RUN+=\"/bin/setserial /dev/%k low_latency\"",
-                "EOF6"
+                "EOF6",
+                "if [ -f /etc/udev/rules.d/55-roverrobotics ]",
+                "then",
+                "    echo \"create_udev: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"create_udev: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+
             ]
         }
     ],
@@ -221,7 +333,13 @@
             "download_rover_stack": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_ROVER_STACK"
+                "git clone $KEY_ROVER_STACK",
+                "if [ -d ~/catkin_ws/src/$KEYV_ROVER_STACK ]",
+                "then",
+                "    echo \"download_rover_stack: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"download_rover_stack: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
