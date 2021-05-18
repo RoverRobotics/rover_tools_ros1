@@ -1,10 +1,10 @@
 {
     "$KEY_LIBROVER": "https://github.com/roverrobotics/librover -b 3.0.0",
-    "KEYV_LIBROVER": "librover",
+    "$KEYV_LIBROVER": "librover",
     "$KEY_DS4_DRV": "https://github.com/naoki-mizuno/ds4drv --branch devel",
-    "KEYV_DS4_DRV": "ds4drv",
+    "$KEYV_DS4_DRV": "ds4drv",
     "$KEY_ROVER_TESTS": "https://github.com/RoverRobotics/robottests -b main",
-    "KEYV_ROVER_TESTS": "robottests",
+    "$KEYV_ROVER_TESTS": "robottests",
     "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.0.0",
     "$KEYV_ROVER_ROS1": "roverrobotics_ros1",
     "$KEY_RPI_ROS": "https://github.com/Slamtec/rplidar_ros.git",
