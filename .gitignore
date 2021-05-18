@@ -2,3 +2,6 @@ credentials*
 __init__.pyc
 *.vscode*
 __pycache__
+*.log
+*temp*
+robottests*
