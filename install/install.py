@@ -24,6 +24,15 @@ class RobotPackageInstaller():
         with open(playbooks, "r") as inputfile:
             self.playbooks = json.load(inputfile)
 
+        # find the verification filepath
+        for var in self.variables:
+            if "VERIFICATION_FILE" in var:
+                self.verification_file_path = self.variables[var]
+                self.verification_file_path = (
+                    os.path.expanduser("~") + self.verification_file_path.replace("~", "")
+                ) if "~" in self.verification_file_path else self.verification_file_path
+
+
     def set_model(self, model: str):
         if model not in self.playbooks:
             raise ValueError(
@@ -50,6 +59,10 @@ class RobotPackageInstaller():
         # open a master install log
         fout = open(logfile_location,'wb')
         fout.close()
+
+        # clear the verification file
+        vout = open(self.verification_file_path, 'wb')
+        vout.close()
 
         for index ,play in enumerate(self.playbooks[self.model]):
             print("Running install set %d of %d" % (index+1, len(self.playbooks[self.model])), end=" ")
@@ -80,10 +93,20 @@ class RobotPackageInstaller():
 
                     fout.write(stdout)
                     fout.write(stderr)
-                    # fout.writelines(output)
+                    self.verify_last_()
             print("")
         print ("Finished running install playbook.")
         input("Press Enter to Continue")
+
+    def verify_last_(self):
+        # the expectation is that there is a verification file which
+        # has 1 line per install operation having the work Success or Failure
+        with open(self.verification_file_path, "r") as verification_file:
+            lines = verification_file.readlines()
+            if len(lines) > 0:
+                if "Fail" in lines[-1] or "fail" in lines[-1]:
+                    raise ValueError("Failed to perform %s" % lines[-1])
+
         
 
 if __name__ == "__main__":
