@@ -44,5 +44,6 @@ class RobotTester():
 
 
         if user_accepts == 'n':
-            raise ValueError('The Robot failed one or more tests. See test/testing_log.json for details.')
-            exit()
+            return False
+        else:
+            return True

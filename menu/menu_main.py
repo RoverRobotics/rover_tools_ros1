@@ -50,18 +50,27 @@ install_submenu_item = SubmenuItem("Install", install_submenu, menu)
 
 # tester
 tester = RobotTester()
+test_submenu = ConsoleMenu("Select Model")
 
-def tester_main():
-    device_serial_number = input("Enter serial number: ")
-    tester.execute_test_cases()
-    if mfgdb is not None:
-        if not mfgdb.publish_test_log(os.path.dirname(__file__) + "/../testing/testing_log.json", device_serial_number):
-            raise ValueError('Failed to publish test log to cloud. Halting.')
+def tester_main(model:str):
+    acceptance = tester.execute_test_cases()
+    if acceptance:
+        if mfgdb is not None:
+            device_serial_number = input("Enter serial number: ")
+            if not mfgdb.publish_test_log(os.path.dirname(__file__) + "/../testing/testing_log.json", device_serial_number):
+                input('Failed to publish results to cloud. Contact your system administrator.')
+    else:
+        if mfgdb is not None:
+            input("Did not publish results to cloud. Push Enter to continue.")
 
-test_function = FunctionItem("Test", tester_main)
+test_functions = [FunctionItem(robot, tester_main, kwargs={'model':robot}) for robot in robots]
+for func in test_functions:
+    test_submenu.append_item(func)
+
+test_submenu_item = SubmenuItem("Test", test_submenu, menu)
 
 menu.append_item(install_submenu_item)
-menu.append_item(test_function)
+menu.append_item(test_submenu_item)
 
 # Finally, we call show to show the menu and allow the user to interact
 menu.show()

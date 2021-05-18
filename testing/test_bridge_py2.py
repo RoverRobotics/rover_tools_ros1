@@ -1,4 +1,4 @@
-from robottests.movement_unit_tests import get_test_suite
+from robottests.movement_unit_tests import get_test_suite, system_ready_for_test
 import unittest
 import os
 import json
@@ -6,7 +6,23 @@ import json
 
 def execute_test_cases(test_log_file = os.path.dirname(os.path.abspath(__file__)) + "/testing_log.json"):
  
+    operator_name = raw_input("Enter your name: ")
     # collect all the test cases
+    if not system_ready_for_test():
+        with open(test_log_file, "w") as logfile:
+            json.dump(
+                {
+                    "tests": [],
+                    "failures": [],
+                    "errors": ["THE SYSTEM WAS NOT TESTED!"],
+                    "operator": operator_name
+                },
+                logfile,
+                indent=4,
+                sort_keys=True
+            )
+            return
+    
     test_suite = get_test_suite()
 
     # build a runner
@@ -25,9 +41,12 @@ def execute_test_cases(test_log_file = os.path.dirname(os.path.abspath(__file__)
             {
                 "tests": tests,
                 "failures": failures,
-                "errors": errors
+                "errors": errors,
+                "operator": operator_name
             },
-            logfile
+            logfile,
+            indent=4,
+            sort_keys=True
         )
     
 
