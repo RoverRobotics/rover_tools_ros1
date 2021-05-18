@@ -88,12 +88,22 @@ class ManufacturingRecordDb():
 
     def publish_install_log(self, logfile_path:str, serial_number:str):
         try:
-            response = self.s3.upload_file(logfile_path, "install-logs", serial_number + ".log")
+            response = self.s3.upload_file(logfile_path, "rr-install-logs", serial_number + ".log")
         except:
             print(response)
             return False
 
         return True
+
+    def publish_test_log(self, logfile_path:str, serial_number:str):
+        try:
+            response = self.s3.upload_file(logfile_path, "rr-mfg-test-logs", "log_" + serial_number + ".json")
+        except:
+            print(response)
+            return False
+
+        return True
+    
 
     def get_local_credentials(credential_file=(os.path.dirname(__file__) + "/credentials.json")):
         try:
