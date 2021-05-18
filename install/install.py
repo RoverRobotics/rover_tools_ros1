@@ -95,8 +95,6 @@ class RobotPackageInstaller():
                     fout.write(stderr)
                     self.verify_last_()
             print("")
-        print ("Finished running install playbook.")
-        input("Press Enter to Continue")
 
     def verify_last_(self):
         # the expectation is that there is a verification file which
@@ -106,6 +104,14 @@ class RobotPackageInstaller():
             if len(lines) > 0:
                 if "Fail" in lines[-1] or "fail" in lines[-1]:
                     raise ValueError("Failed to perform %s" % lines[-1])
+
+    def print_verification_results(self):
+        if self.verification_file_path is not None:
+            with open(self.verification_file_path, "r") as vf:
+                lines = vf.readlines()
+                for line in lines:
+                    print(line, end="")
+
 
         
 

@@ -3,6 +3,7 @@ import os
 import subprocess
 import time
 import json
+import pexpect
 
 class RobotTester():
     def __init__(self):
@@ -16,8 +17,9 @@ class RobotTester():
         
         test_script = os.path.dirname(os.path.abspath(__file__)) + "/test_bridge_py2.py"
         test_command = test_script
-        py2_partner = subprocess.call(["gnome-terminal", "--", "python2", test_command])
-
+        #py2_partner = subprocess.call(["gnome-terminal", "--", "python2", test_command])
+        py2_partner = pexpect.spawn("python2 " + test_command)
+        py2_partner.interact()
         while not os.path.exists(logfile_path):
             continue
         
