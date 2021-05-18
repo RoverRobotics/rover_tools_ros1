@@ -26,26 +26,22 @@ class RobotTester():
         with open(logfile_path, "r") as logfile:
             results = json.load(logfile)
 
-        user_accepts = None 
-        while user_accepts != 'y' and user_accepts != 'n':
-            print("TESTS: %d" % len(results['tests']))
-            for test in results['tests']:
-                print(test)
+        
+        print("TESTS: %d" % len(results['tests']))
+        for test in results['tests']:
+            print(test)
 
-            print("")
-            print("Failures: %d" % len(results['failures']))
-            for failure in results['failures']:
-                print(failure)
+        print("")
+        print("Failures: %d" % len(results['failures']))
+        for failure in results['failures']:
+            print(failure)
 
-            print("")
-            print("Errors: %d" % len(results['errors']))
-            for error in results['errors']:
-                print(error)
+        print("")
+        print("Errors: %d" % len(results['errors']))
+        for error in results['errors']:
+            print(error)
 
-            user_accepts = input("Accept results y/n?: ")
-
-
-        if user_accepts == 'n':
-            return False
-        else:
+        if len(results['failures']) == 0 and len(results['errors']) == 0:
             return True
+        else:
+            return False

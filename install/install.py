@@ -112,6 +112,12 @@ class RobotPackageInstaller():
                 for line in lines:
                     print(line, end="")
 
+    def get_verification_file(self):
+        if self.verification_file_path is not None:
+            return self.verification_file_path
+        else:
+            return None
+
 
         
 

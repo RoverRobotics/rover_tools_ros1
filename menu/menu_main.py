@@ -57,6 +57,11 @@ def installer_main(model:str):
         if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
             raise ValueError('Failed to publish install log to cloud. Halting.')
 
+        verification_file = installer.get_verification_file()
+        if verification_file is not None:
+            if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
+                raise ValueError('Failed to publish verification log to cloud. Halting.')
+
 
 install_functions = [FunctionItem(robot, installer_main, kwargs={"model":robot}) for robot in robots]
 for func in install_functions:
@@ -94,6 +99,8 @@ def tester_main(model:str):
                     input('Failed to publish results to cloud. Contact your system administrator.')
             else:
                 input("Did not publish results to cloud. Push Enter to continue.")
+    else:
+        input("One or more problems were encountered during testing. See above. Press Enter to return to menu.")
 
 test_functions = [FunctionItem(robot, tester_main, kwargs={'model':robot}) for robot in robots]
 for func in test_functions:
