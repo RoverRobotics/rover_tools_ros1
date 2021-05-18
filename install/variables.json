@@ -3,12 +3,14 @@
     "$KEY_DS4_DRV": "https://github.com/naoki-mizuno/ds4drv --branch devel",
     "$KEY_ROVER_TESTS": "https://github.com/RoverRobotics/Robottests -b main",
     "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.0.0",
+    "$KEYV_ROVER_ROS1": "roverrobotics_ros1",
     "$KEY_RPI_ROS": "https://github.com/Slamtec/rplidar_ros.git",
     "$KEY_DS4_ROS": "https://github.com/naoki-mizuno/ds4_driver -b melodic-devel",
     "$KEY_ROVER_STACK": "https://github.com/roverrobotics/roverrobotics_stack -b 1.1.2",
     "$KEY_PRO_LAUNCH": "roverrobotics_driver pro_teleop.launch",
     "$KEY_PRO2_LAUNCH": "roverrobotics_driver pro2_teleop.launch",
     "$KEY_MINI_LAUNCH": "roverrobotics_driver pro2_teleop.launch",
-    "$KEY_ZERO2_LAUNCH": "rr_rover_zero_v2_driver teleop.launch"
+    "$KEY_ZERO2_LAUNCH": "rr_rover_zero_v2_driver teleop.launch",
+    "$KEY_VERIFICATION_FILE": "~/rr-install-verification.file"
     
 }

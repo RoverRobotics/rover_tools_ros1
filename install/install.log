@@ -1,0 +1,12 @@
+#Bash command 
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src/
+git clone https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.0.0
+if [ -d ~/catkin_ws/src/roverrobotics_ros1 ]
+then
+    echo "download_roverrobotics_ros1: Success" >> ~/rr-install-verification.file
+else
+    echo "download_roverrobotics_ros1: Failure" >> ~/rr-install-verification.file
+fi
+#Terminal Output 
+fatal: destination path 'roverrobotics_ros1' already exists and is not an empty directory.

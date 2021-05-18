@@ -155,7 +155,13 @@
             "download_roverrobotics_ros1": [
                 "mkdir -p ~/catkin_ws/src",
                 "cd ~/catkin_ws/src/",
-                "git clone $KEY_ROVER_ROS1"
+                "git clone $KEY_ROVER_ROS1",
+                "if [ -d ~/catkin_ws/src/$KEYV_ROVER_ROS1 ]",
+                "then",
+                "    echo \"download_roverrobotics_ros1: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"download_roverrobotics_ros1: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ],
             "install_librover": [
                 "mkdir -p ~/drivers",
