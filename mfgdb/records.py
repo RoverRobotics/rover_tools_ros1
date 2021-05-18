@@ -86,9 +86,9 @@ class ManufacturingRecordDb():
 
         return confirmation
 
-    def publish_install_log(self, logfile_path:str, serial_number:str):
+    def publish_install_log(self, logfile_path:str, filename:str):
         try:
-            response = self.s3.upload_file(logfile_path, "rr-install-logs", serial_number + ".log")
+            response = self.s3.upload_file(logfile_path, "rr-install-logs", filename + ".log")
         except:
             print(response)
             return False
