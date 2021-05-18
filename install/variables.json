@@ -14,9 +14,9 @@
     "$KEY_ROVER_STACK": "https://github.com/roverrobotics/roverrobotics_stack -b 1.1.2",
     "$KEYV_ROVER_STACK": "roverrobotics_stack",
     "$KEY_PRO_LAUNCH": "\"roverrobotics_driver pro_teleop.launch\"",
-    "$KEY_PRO2_LAUNCH": "roverrobotics_driver pro2_teleop.launch",
-    "$KEY_MINI_LAUNCH": "roverrobotics_driver mini_teleop.launch",
-    "$KEY_ZERO2_LAUNCH": "rr_rover_zero_v2_driver teleop.launch",
+    "$KEY_PRO2_LAUNCH": "\"roverrobotics_driver pro2_teleop.launch\"",
+    "$KEY_MINI_LAUNCH": "\"roverrobotics_driver mini_teleop.launch\"",
+    "$KEY_ZERO2_LAUNCH": "\"rr_rover_zero_v2_driver teleop.launch\"",
     "$KEY_VERIFICATION_FILE": "~/rr-install-verification.file"
     
 }
