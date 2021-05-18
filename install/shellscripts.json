@@ -18,6 +18,7 @@
     "rover_ros_subsystem_files": [
         {
             "create_rover_ros_env": [
+                "sudo mkdir -p /etc/roverrobotics/",
                 "cat << EOF1 | sudo tee /etc/roverrobotics/env.sh",
                 "#!/bin/sh",
                 "export ROS_HOSTNAME=$(hostname).local",
@@ -50,6 +51,7 @@
                 "[Install]",
                 "WantedBy=multi-user.target",
                 "EOF3",
+                "sudo chmod +x /usr/sbin/roverrobotics",
                 "sudo systemctl enable roverrobotics.service"
             ]
         }
@@ -185,12 +187,26 @@
                 "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics"
             ]
         }
-
     ],
     "setup_launch_zero2": [
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics"
+            ]
+        }
+    ],
+    "rover_udev": [
+        {
+            "udev": [
+                "cat << EOF8 | sudo tee /etc/udev/rules.d/55-roverrobotics",
+                "#creates fixed name for rover serial communication",
+                "#rover zero",
+                "KERNEL==\"ttyACM*\", ATTRS{idVendor}==\"03eb\", ATTRS{idProduct}==\"2404\", MODE:=\"0777\", SYMLINK+=\"rover-zero\" ",
+                "#rover zero v2",
+                "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverZeroV2\", MODE:=\"0777\", SYMLINK+=\"rover-zero-v2\", RUN+=\"/bin/setserial /dev/%k low_latency\" ",
+                "# rover pro",
+                "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverPro\", MODE:=\"0777\", SYMLINK+=\"rover-pro\", RUN+=\"/bin/setserial /dev/%k low_latency\"",
+                "EOF6"
             ]
         }
     ],
@@ -218,8 +234,11 @@
     ],
     "start_rover_ros1_services": [
         {
-            "start_services":[
-                "sudo systemctl start roverrobotics.services"
+            "start_services": [
+                "source /opt/ros/melodic/setup.bash",
+                "source ~/catkin_ws/devel/setup.bash",
+                "sudo systemctl start roscore.service",
+                "sudo systemctl start roverrobotics.service"
             ]
         }
     ],
