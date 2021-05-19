@@ -369,17 +369,16 @@
     "uninstall_scripts": [
         {
             "remove-catkin_ws": [
-                "sudo apt-get remove git nano net-tools openssh-server ros-melodic-desktop -y",
+                "sudo apt-get remove net-tools openssh-server -y",
                 "sed -i '/melodic/d' ~/.bashrc",
                 "sed -i '/catkin_ws/d' ~/.bashrc",
-                "sudo mv catkin_ws/ catkin_ws_old/",
-                "sudo apt-get remove python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential ros-melodic-serial ros-melodic-joy ros-melodic-twist-mux ros-melodic-tf2-geometry-msgs ros-melodic-robot-localization ros-melodic-gmapping ros-melodic-move-base -y",
+                "sudo mv ~/catkin_ws/ ~/catkin_ws_old/",
                 "sudo rm -rf ~/drivers #librover and ps4 driver",
                 "sudo rm -rf ~/.local/lib/python2.7/site-packages/ds4drv-0.5.1-py2.7.egg #installed ps4 driver",
                 "sudo rm -rf ~/.local/bin/ds4drv",
                 "sudo rm -rf /etc/udev/rules.d/50-ds4drv.rules #ps4 udev",
                 "sudo rm -rf /etc/udev/rules.d/55-roverrobotics.rules #rover udev",
-                "sudo rm -rf ~/$KEYV_ROVER_TEST #robot test",
+                "sudo rm -rf ~/$KEYV_ROVER_TESTS #robot test",
                 "sudo rm -rf /etc/roverrobotics #env",
                 "sudo rm -rf /usr/sbin/roverrobotics #selector",
                 "sudo rm -rf /etc/systemd/system/roscore.service #ros service",
