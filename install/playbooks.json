@@ -1,5 +1,6 @@
 {
     "pro_ros1": [
+        "uninstall_scripts",
         "prereq",
         "rover_ros_subsystem_files",
         "ds4",
@@ -13,6 +14,7 @@
         "start_rover_ros1_services"
     ],
     "zero_ros1": [
+        "uninstall_scripts",
         "prereq",
         "rover_ros_subsystem_files",
         "rover_stack",
@@ -26,6 +28,7 @@
         "start_rover_ros1_services"
     ],
     "mini_ros1": [
+        "uninstall_scripts",
         "prereq",
         "rover_ros_subsystem_files",
         "ds4",
@@ -39,6 +42,7 @@
         "start_rover_ros1_services"
     ],
     "pro2_ros1": [
+        "uninstall_scripts",
         "prereq",
         "rover_ros_subsystem_files",
         "ds4",
