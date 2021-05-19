@@ -103,7 +103,7 @@ class RobotPackageInstaller():
             lines = verification_file.readlines()
             if len(lines) > 0:
                 if "Fail" in lines[-1] or "fail" in lines[-1]:
-                    raise ValueError("Failed to perform %s" % lines[-1])
+                    input("Installer failed to perform %s" % lines[-1])
 
     def print_verification_results(self):
         if self.verification_file_path is not None:

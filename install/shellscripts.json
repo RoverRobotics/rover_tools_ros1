@@ -109,8 +109,7 @@
             "download_test_repo": [
                 "cd ./testing",
                 "git clone $KEY_ROVER_TESTS $KEYV_ROVER_TESTS",
-                "chmod +x ~/$KEYV_ROVER_TESTS/",
-                "if [ -d ~/$KEYV_ROVER_TESTS ]",
+                "if [ -d ./$KEYV_ROVER_TESTS ]",
                 "then",
                 "    echo \"download_test_repo: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -357,11 +356,28 @@
     ],
     "start_rover_ros1_services": [
         {
-            "start_services": [
+            "start_roscore_service": [
                 "source /opt/ros/melodic/setup.bash",
                 "source ~/catkin_ws/devel/setup.bash",
                 "sudo systemctl start roscore.service",
-                "sudo systemctl start roverrobotics.service"
+                "if sudo systemctl status roscore.service | grep -i running",
+                "then",
+                "    echo \"start_roscore_service: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"start_roscore_service: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+                
+            ],
+            "start_roverrobotics_service": [
+                "source /opt/ros/melodic/setup.bash",
+                "source ~/catkin_ws/devel/setup.bash",
+                "sudo systemctl start roverrobotics.service",
+                "if sudo systemctl status roverrobotics.service | grep -i running",
+                "then",
+                "    echo \"start_roverrobotics_service: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"start_roverrobotics_service: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
             ]
         }
     ],
