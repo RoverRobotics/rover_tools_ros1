@@ -107,8 +107,7 @@
     "rover_test_repo": [
         {
             "download_test_repo": [
-                "mkdir -p ~/rover_test",
-                "cd ~/rover_test",
+                "cd ./testing",
                 "git clone $KEY_ROVER_TESTS $KEYV_ROVER_TESTS",
                 "chmod +x ~/$KEYV_ROVER_TESTS/",
                 "if [ -d ~/$KEYV_ROVER_TESTS ]",
@@ -233,7 +232,7 @@
                 "mkdir -p ~/drivers",
                 "cd ~/drivers",
                 "git clone $KEY_LIBROVER $KEYV_LIBROVER",
-                "if [ -d ~/catkin_ws/src/$KEYV_LIBROVER ]",
+                "if [ -d ~/drivers/$KEYV_LIBROVER ]",
                 "then",
                 "    echo \"download_librover: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
