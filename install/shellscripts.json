@@ -255,7 +255,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_PRO_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep $KEY_PRO_LAUNCH /usr/sbin/roverrobotics",
+                "if grep \"$KEY_PRO_LAUNCH\" /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -268,7 +268,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep $KEY_PRO2_LAUNCH /usr/sbin/roverrobotics",
+                "if grep \"$KEY_PRO2_LAUNCH\" /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -281,7 +281,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep $KEY_MINI_LAUNCH /usr/sbin/roverrobotics",
+                "if grep \"$KEY_MINI_LAUNCH\" /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -295,7 +295,7 @@
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep $KEY_ZERO2_LAUNCH /usr/sbin/roverrobotics",
+                "if grep \"$KEY_ZERO2_LAUNCH\" /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
