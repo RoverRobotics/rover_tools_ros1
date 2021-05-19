@@ -64,6 +64,16 @@ class RobotPackageInstaller():
         vout = open(self.verification_file_path, 'wb')
         vout.close()
 
+        # validate that the playbooks contain valid plays
+        try:
+            for play in self.playbooks[self.model]:
+                for command_set in self.install_commands[play]:
+                    pass
+        except Exception as e:
+            input("there was an error in the .json install configurations. Check playbooks.json and try again: %s " % e)
+            exit()
+        
+
         for index ,play in enumerate(self.playbooks[self.model]):
             print("Running install set %d of %d" % (index+1, len(self.playbooks[self.model])), end=" ")
             for command_set in self.install_commands[play]:
