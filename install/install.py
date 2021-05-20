@@ -1,7 +1,6 @@
 from abc import get_cache_token
 import json
 import os, stat
-# import subprocess
 from subprocess import PIPE, Popen
 import sys
 class RobotPackageInstaller():
@@ -52,7 +51,7 @@ class RobotPackageInstaller():
         return models
             
     
-    def run_install(self, logfile_location=os.path.dirname(__file__) + "/install.log", model=None):
+    def run_install(self, logfile_location=os.path.dirname(__file__) + "/install.log", model=None, verification_file_header=None):
         if model is not None:
             self.set_model(model)
         
@@ -60,8 +59,10 @@ class RobotPackageInstaller():
         fout = open(logfile_location,'wb')
         fout.close()
 
-        # clear the verification file
-        vout = open(self.verification_file_path, 'wb')
+        # clear the verification file and write any valid header
+        vout = open(self.verification_file_path, 'w')
+        if isinstance(verification_file_header, str):
+            vout.write(verification_file_header + '\n')
         vout.close()
 
         # validate that the playbooks contain valid plays

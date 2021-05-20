@@ -24,8 +24,8 @@ def user_says_yes(question:str):
         return False
 
 
-with open(os.path.dirname(__file__) + "/menu_version.json", "r") as version_file:
-    menu_version = json.load(version_file)['MenuVersion']
+with open(os.path.dirname(__file__) + "/tool_version.json", "r") as version_file:
+    tool_version = json.load(version_file)['ToolVersion']
 
 # determine if this should be the internal or the external version of the tool
 launch_production_menu = ManufacturingRecordDb.test_credentials(*ManufacturingRecordDb.get_local_credentials())
@@ -33,9 +33,9 @@ mfgdb = None if not launch_production_menu else ManufacturingRecordDb(*Manufactu
 
 # Create the menu
 if launch_production_menu:
-    menu = ConsoleMenu("Rover Manufacturing Tool v%s" % menu_version, "Internal Tools")
+    menu = ConsoleMenu("Rover Manufacturing Tool v%s" % tool_version, "Internal Tools")
 else:
-    menu = ConsoleMenu("Rover Manufacturing Tool v%s" % menu_version, "Customer Tools")
+    menu = ConsoleMenu("Rover Manufacturing Tool v%s" % tool_version, "Customer Tools")
 
 # start with no serial number
 device_serial_number = None
@@ -47,7 +47,7 @@ install_submenu = ConsoleMenu("Installation: Select Model")
 
 def installer_main(model:str):
     print('Starting install, please wait.')
-    installer.run_install(model=model)
+    installer.run_install(model=model, verification_file_header="tool version: " + tool_version)
     installer.print_verification_results()
     input('Installation complete. Press enter to continue.')
     if mfgdb is not None:
