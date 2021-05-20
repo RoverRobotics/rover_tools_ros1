@@ -315,7 +315,7 @@
                 "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverPro\", MODE:=\"0777\", SYMLINK+=\"rover-pro\", RUN+=\"/bin/setserial /dev/%k low_latency\"",
                 "EOF8",
                 "sudo udevadm control --reload-rules && sudo udevadm trigger",
-                "if [ -f /etc/udev/rules.d/55-roverrobotics ]",
+                "if [ -f /etc/udev/rules.d/55-roverrobotics.rules ]",
                 "then",
                 "    echo \"create_udev: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
