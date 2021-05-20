@@ -105,7 +105,7 @@ class ManufacturingRecordDb():
         return True
     
 
-    def get_local_credentials(credential_file=(os.path.dirname(__file__) + "/credentials.json")):
+    def get_local_credentials(credential_file=("/media/rover/install_stick/credentials.json")):
         try:
             with open(credential_file, "r") as read_file:
                 credentials = json.load(read_file)
