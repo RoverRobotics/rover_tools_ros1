@@ -305,7 +305,7 @@
     "rover_udev": [
         {
             "create_udev": [
-                "cat << EOF8 | sudo tee /etc/udev/rules.d/55-roverrobotics",
+                "cat << EOF8 | sudo tee /etc/udev/rules.d/55-roverrobotics.rules",
                 "#creates fixed name for rover serial communication",
                 "#rover zero",
                 "KERNEL==\"ttyACM*\", ATTRS{idVendor}==\"03eb\", ATTRS{idProduct}==\"2404\", MODE:=\"0777\", SYMLINK+=\"rover-zero\" ",
@@ -313,7 +313,7 @@
                 "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverZeroV2\", MODE:=\"0777\", SYMLINK+=\"rover-zero-v2\", RUN+=\"/bin/setserial /dev/%k low_latency\" ",
                 "# rover pro",
                 "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"RoverPro\", MODE:=\"0777\", SYMLINK+=\"rover-pro\", RUN+=\"/bin/setserial /dev/%k low_latency\"",
-                "EOF6",
+                "EOF8",
                 "if [ -f /etc/udev/rules.d/55-roverrobotics ]",
                 "then",
                 "    echo \"create_udev: Success\" >> $KEY_VERIFICATION_FILE",
