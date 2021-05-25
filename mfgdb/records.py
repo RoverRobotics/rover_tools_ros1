@@ -133,27 +133,7 @@ class ManufacturingRecordDb():
                 
 
 if __name__ == '__main__':
-    access_id, access_key = ManufacturingRecordDb.get_local_credentials()
-    db = ManufacturingRecordDb(access_id, access_key)
-    db.get_robot_information("000000")
-    db.register_robot(
-        {
-            "SerialNumber":"123457",
-            "RobotModel":"Mini",
-            "FinalAssemblyNumber":"A700-FOOBAR",
-            "FinalAssemblyRevision":"ZZZZZ",
-            "FirmwareVersion":"noneofyourbusiness",
-            "GUID":"????",
-            "Operator":"Obviously TOM",
-            "Date":"today",
-            "Time":"now",
-            "CalibrationData":"calibratedAF",
-            "TestResults":"all clear",
-            "TestedBy":"dingusboi",
-            "InspectionData":"it was all good homie",
-            "InspectedBy":"get bent"
-        }
-    )
+    pass
     
 
 
