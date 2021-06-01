@@ -47,9 +47,9 @@ def build_shell_script(commands, loc=TEMP_SHELL_SCRIPT_LOC):
 
 
 def run_shell_script(loc=TEMP_SHELL_SCRIPT_LOC):
-    os.chmod("temp.sh", stat.S_IROTH | stat.S_IWOTH |
+    os.chmod(loc, stat.S_IROTH | stat.S_IWOTH |
                              stat.S_IXOTH | stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR)
-    output = Popen("%s" % ("/bin/bash temp.sh"),
+    output = Popen("/bin/bash %s" % loc,
                     shell=True, stdout=PIPE, stderr=PIPE)
     stdout, stderr = output.communicate()
     stdout = str(stdout.decode('UTF-8')).replace("\n", "\r\n")

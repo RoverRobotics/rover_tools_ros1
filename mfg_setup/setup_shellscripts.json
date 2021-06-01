@@ -21,15 +21,12 @@
         {
             "mfg_mode": [
                 "sudo systemctl stop roverrobotics",
-                "sudo systemctl stop roscore",
                 "killall roslaunch",
-                "killall roscore",
                 "source ~/catkin_ws/devel/setup.bash",
-                "screen roslaunch roverrobotics_driver mfg_pro_4WD.launch"
+                "screen -dm bash -c \"roslaunch roverrobotics_driver mfg_pro_4WD.launch\""
             ],
             "normal_mode": [
                 "killall roslaunch",
-                "killall roscore",
                 "killall screen",
                 "sudo systemctl start roscore",
                 "sudo systemctl start roverrobotics"
