@@ -3,6 +3,7 @@ import os
 import stat
 from subprocess import PIPE, Popen
 import sys
+from types import ModuleType
 
 
 class RobotCalibrator():
@@ -22,10 +23,15 @@ class RobotCalibrator():
                 "Invalid robot model %s. No valid plan to install for %s" % (model, model))
         self.model = model
 
-    def calibrate(self, logfile_location=os.path.dirname(__file__) + "/calibration.log", model=None):
-        if model is not None:
-            self.set_model(model)
-        # open a master install log
+    def run_setup(self):
+        print("Running %s calibration" % self.model)
+        self.run_commands()
+
+    def resume(self):
+        print("Resuming %s calibration" % self.model)
+        self.run_commands()
+
+    def run_commands(self,logfile_location=os.path.dirname(__file__) + "/calibration.log"):
         fout = open(logfile_location, 'wb')
         fout.close()
 
@@ -38,8 +44,6 @@ class RobotCalibrator():
             exit()
 
         for index, play in enumerate(self.playbooks[self.model]):
-            print("Running calibration command set %d of %d" %
-                  (index+1, len(self.playbooks[self.model])), end=" ")
             for command_set in self.commands[play]:
                 for command_category, commands in command_set.items():
                     fout = open(logfile_location, 'a')
@@ -72,3 +76,16 @@ class RobotCalibrator():
                     fout.write(stderr)
                     self.verify_last_()
             print("")
+
+    def calibrate(self, model=None):
+        if model is not None:
+            self.set_model(model)
+            if "setup" in model:
+                self.run_setup()
+                #calibration code go here ? 
+            elif "resume" in model:
+                self.resume()
+            #resume automatically
+            # self.set_model(model.replace("setup","resume"))
+            # self.run_setup()
+        # open a master install log
