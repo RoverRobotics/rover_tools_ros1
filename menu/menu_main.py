@@ -11,6 +11,7 @@ import json
 from install.install import RobotPackageInstaller
 from mfgdb.records import ManufacturingRecordDb
 from testing.test_bridge import RobotTester
+from mfg_setup import mfg_setup
 from calibration.calibration import RobotCalibrator
 
 def user_says_yes(question:str):
@@ -77,7 +78,7 @@ install_submenu_item = SubmenuItem("Install", install_submenu, menu)
 # calibration
 calibrator = RobotCalibrator()
 calibration_submenu = ConsoleMenu("Calibration: Select Model")
-
+robots = mfg_setup.get_models()
 def calibration_main(model:str):
     try:
         print('Starting calibration, please wait.')
@@ -112,7 +113,7 @@ calibration_submenu_item = SubmenuItem("Calibrate", calibration_submenu, menu)
 # tester
 tester = RobotTester()
 test_submenu = ConsoleMenu("Testing: Select Model")
-
+robots = mfg_setup.get_models()
 def tester_main(model:str):
     try:
         acceptance = tester.execute_test_cases()
@@ -140,7 +141,7 @@ test_submenu_item = SubmenuItem("Test", test_submenu, menu)
 # register 
 
 menu.append_item(install_submenu_item)
-menu.append_item(calibration_submenu_item)
+#menu.append_item(calibration_submenu_item)
 menu.append_item(test_submenu_item)
 
 # Finally, we call show to show the menu and allow the user to interact

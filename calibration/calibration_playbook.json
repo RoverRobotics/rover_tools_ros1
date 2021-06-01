@@ -1,8 +1,8 @@
 {
-    "pro_2WD_ros1": ["pro_ros1_2WD_calibration"],
-    "pro_4WD_ros1": ["pro_ros1_4WD_calibration"],
-    "zero_2WD_ros1": ["zero_ros1_2WD_calibration"],
-    "zero_4WD_ros1": ["zero_ros1_4WD_calibration"],
-    "mini_ros1": ["mini_ros1_calibration"],
-    "pro2_ros1": ["pro2_ros1_calibration"]
+    "pro_2WD_ros1": [],
+    "pro_4WD_ros1": [],
+    "zero_2WD_ros1": [],
+    "zero_4WD_ros1": [],
+    "mini_ros1": [],
+    "pro2_ros1": []
 }
