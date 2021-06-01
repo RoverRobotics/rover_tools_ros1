@@ -1,64 +1,8 @@
 {
-    "pro_2WD_ros1_setup": [
-        "kill",
-        "stop",
-        "start_pro_2WD_ros1"
-    ],
-    "pro_2WD_ros1_resume": [
-        "kill",
-        "stop",
-        "start"
-    ],
-    "pro_4WD_ros1_setup": [
-        "kill",
-        "stop",
-        "start_pro_4WD_ros1",
-        "kill",
-        "start"
-    ],
-    "pro_4WD_ros1_resume": [
-        "kill",
-        "stop",
-        "start"
-    ],
-    "zero_2WD_ros1_setup": [
-        "kill",
-        "stop",
-        "start_zero_2WD_ros1"
-    ],
-    "zero_2WD_ros1_resume": [
-        "kill",
-        "stop",
-        "start"
-    ],
-    "zero_4WD_ros1_setup": [
-        "kill",
-        "stop",
-        "start_zero_2WD_ros1"
-    ],
-    "zero_4WD_ros1_resume": [
-        "kill",
-        "stop",
-        "start"
-    ],
-    "mini_ros1_setup": [
-        "kill",
-        "stop",
-        "start_mini_ros1"
-    ],
-    "mini_ros1_start": [
-        "kill",
-        "stop",
-        "start"
-    ],
-    "pro2_ros1_setup": [
-        "kill",
-        "stop",
-        "start_pro2_ros1"
-    ],
-    "pro2_ros1_resume": [
-        "kill",
-        "stop",
-        "start"
-    ]
+    "pro_2WD_ros1": ["pro_ros1_2WD_calibration"],
+    "pro_4WD_ros1": ["pro_ros1_4WD_calibration"],
+    "zero_2WD_ros1": ["zero_ros1_2WD_calibration"],
+    "zero_4WD_ros1": ["zero_ros1_4WD_calibration"],
+    "mini_ros1": ["mini_ros1_calibration"],
+    "pro2_ros1": ["pro2_ros1_calibration"]
 }

@@ -1,57 +1,116 @@
 {
-    "stop": [
+    "pro_ros1_2WD_calibration": [
         {
-            "stop-rover-services": [
+            "stop": [
                 "sudo systemctl stop roverrobotics",
-                "sudo systemctl stop roscore"
-            ]
-        }
-    ],
-    "start": [
-        {
-            "start-rover-services": [
-                "sudo systemctl start roverrobotics",
-                "sudo systemctl start roscore"
-            ]
-        }
-    ],
-    "kill":[
-        {
-            "killall":[
+                "sudo systemctl stop roscore",
+                "killall roslaunch",
                 "killall roscore",
-                "killall rosnode",
-                "killall roslaunch"
+                "source ~/catkin_ws/devel/setup.bash",
+                "screen roslaunch roverrobotics_driver mfg_pro_2WD.launch"
+            ],
+            "start": [
+                "killall roslaunch",
+                "killall roscore",
+                "killall screen",
+                "sudo systemctl start roscore",
+                "sudo systemctl start roverrobotics"
             ]
         }
     ],
-    "start_pro_4_WD_ros1": [
+    "pro_ros1_4WD_calibration": [
         {
-            "start": "roslaunch roverrobotics_driver mfg_pro_4WD.launch"
+            "stop": [
+                "sudo systemctl stop roverrobotics",
+                "sudo systemctl stop roscore",
+                "killall roslaunch",
+                "killall roscore",
+                "source ~/catkin_ws/devel/setup.bash",
+                "screen roslaunch roverrobotics_driver mfg_pro_4WD.launch"
+            ],
+            "start": [
+                "killall roslaunch",
+                "killall roscore",
+                "killall screen",
+                "sudo systemctl start roscore",
+                "sudo systemctl start roverrobotics"
+            ]
         }
     ],
-    "start_pro_2_WD_ros1": [
+    "zero_ros1_2WD_calibration": [
         {
-            "start": "roslaunch roverrobotics_driver mfg_pro_2WD.launch"
+            "stop": [
+                "sudo systemctl stop roverrobotics",
+                "sudo systemctl stop roscore",
+                "killall roslaunch",
+                "killall roscore",
+                "source ~/catkin_ws/devel/setup.bash",
+                "screen roslaunch roverrobotics_driver mfg_zero_2WD.launch"
+            ],
+            "start": [
+                "killall roslaunch",
+                "killall roscore",
+                "killall screen",
+                "sudo systemctl start roscore",
+                "sudo systemctl start roverrobotics"
+            ]
         }
     ],
-    "start_pro2_ros1": [
+    "zero_ros1_4WD_calibration": [
         {
-            "start": "roslaunch roverrobotics_driver mfg_pro2.launch"
+            "stop": [
+                "sudo systemctl stop roverrobotics",
+                "sudo systemctl stop roscore",
+                "killall roslaunch",
+                "killall roscore",
+                "source ~/catkin_ws/devel/setup.bash",
+                "screen roslaunch roverrobotics_driver mfg_zero_4WD.launch"
+            ],
+            "start": [
+                "killall roslaunch",
+                "killall roscore",
+                "killall screen",
+                "sudo systemctl start roscore",
+                "sudo systemctl start roverrobotics"
+            ]
         }
     ],
-    "start_mini_ros1": [
+    "pro2_ros1_calibration": [
         {
-            "start": "roslaunch roverrobotics_driver mfg_mini.launch"
+            "stop": [
+                "sudo systemctl stop roverrobotics",
+                "sudo systemctl stop roscore",
+                "killall roslaunch",
+                "killall roscore",
+                "source ~/catkin_ws/devel/setup.bash",
+                "screen roslaunch roverrobotics_driver mfg_pro2.launch"
+            ],
+            "start": [
+                "killall roslaunch",
+                "killall roscore",
+                "killall screen",
+                "sudo systemctl start roscore",
+                "sudo systemctl start roverrobotics"
+            ]
         }
     ],
-    "start_zero_2WD_ros1": [
+    "mini_ros1_calibration": [
         {
-            "start": "roslaunch rr_rover_zero_v2_driver mfg_zero_2_2WD.launch"
-        }
-    ],
-    "start_zero_4WD_ros1": [
-        {
-            "start": "roslaunch rr_rover_zero_v2_driver mfg_zero_2_4WD.launch"
+            "stop": [
+                "sudo systemctl stop roverrobotics",
+                "sudo systemctl stop roscore",
+                "killall roslaunch",
+                "killall roscore",
+                "source ~/catkin_ws/devel/setup.bash",
+                "screen roslaunch roverrobotics_driver mfg_mini.launch"
+            ],
+            "start": [
+                "killall roslaunch",
+                "killall roscore",
+                "killall screen",
+                "sudo systemctl start roscore",
+                "sudo systemctl start roverrobotics"
+            ]
         }
     ]
 }
