@@ -89,8 +89,9 @@ class ManufacturingRecordDb():
     def publish_install_log(self, logfile_path:str, filename:str):
         try:
             response = self.s3.upload_file(logfile_path, "rr-install-logs", filename + ".log")
-        except:
             print(response)
+        except Exception as e:
+            print('Failed to publish log %s' % e)
             return False
 
         return True
@@ -98,8 +99,9 @@ class ManufacturingRecordDb():
     def publish_test_log(self, logfile_path:str, serial_number:str):
         try:
             response = self.s3.upload_file(logfile_path, "rr-mfg-test-logs", "log_" + serial_number + ".json")
-        except:
             print(response)
+        except Exception as e:
+            print('Failed to publish log %s' % e)
             return False
 
         return True

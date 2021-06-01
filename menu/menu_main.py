@@ -46,21 +46,26 @@ installer = RobotPackageInstaller()
 install_submenu = ConsoleMenu("Installation: Select Model")
 
 def installer_main(model:str):
-    print('Starting install, please wait.')
-    installer.run_install(model=model, verification_file_header="tool version: " + tool_version)
-    installer.print_verification_results()
-    input('Installation complete. Press enter to continue.')
-    if mfgdb is not None:
-        if not user_says_yes("Publish results to cloud?"):
-            return
-        device_serial_number = input("Enter serial number: ")
-        if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
-            raise ValueError('Failed to publish install log to cloud. Halting.')
+    try:
+        print('Starting install, please wait.')
+        installer.run_install(model=model, verification_file_header="tool version: " + tool_version)
+        installer.print_verification_results()
+        input('Installation complete. Press enter to continue.')
+        if mfgdb is not None:
+            if not user_says_yes("Publish results to cloud?"):
+                return
+            device_serial_number = input("Enter serial number: ")
+            if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
+                raise ValueError('Failed to publish install log to cloud. Halting.')
 
-        verification_file = installer.get_verification_file()
-        if verification_file is not None:
-            if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
-                raise ValueError('Failed to publish verification log to cloud. Halting.')
+            verification_file = installer.get_verification_file()
+            if verification_file is not None:
+                if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
+                    raise ValueError('Failed to publish verification log to cloud. Halting.')
+    except Exception as e:
+        print('Install FAILURE')
+        print(e)
+        input('press any key to continue.')
 
 
 install_functions = [FunctionItem(robot, installer_main, kwargs={"model":robot}) for robot in robots]
@@ -74,21 +79,27 @@ calibrator = RobotCalibrator()
 calibration_submenu = ConsoleMenu("Calibration: Select Model")
 
 def calibration_main(model:str):
-    print('Starting calibration, please wait.')
-    calibrator.calibrate(model=model)
-    # installer.print_verification_results()
-    input('Calibration complete. Press enter to continue.')
-    if mfgdb is not None:
-        if not user_says_yes("Publish results to cloud?"):
-            return
-        device_serial_number = input("Enter serial number: ")
-        if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
-            raise ValueError('Failed to publish install log to cloud. Halting.')
+    try:
+        print('Starting calibration, please wait.')
+        calibrator.calibrate(model=model)
+        # installer.print_verification_results()
+        input('Calibration complete. Press enter to continue.')
+        if mfgdb is not None:
+            if not user_says_yes("Publish results to cloud?"):
+                return
+            device_serial_number = input("Enter serial number: ")
+            if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
+                raise ValueError('Failed to publish install log to cloud. Halting.')
 
-        verification_file = installer.get_verification_file()
-        if verification_file is not None:
-            if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
-                raise ValueError('Failed to publish verification log to cloud. Halting.')
+            verification_file = installer.get_verification_file()
+            if verification_file is not None:
+                if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
+                    raise ValueError('Failed to publish verification log to cloud. Halting.')
+    except Exception as e:
+        print('Calibration FAILURE')
+        print(e)
+        input('press any key to continue.')
+
     #if mfgdb is not None:
     #    input("calibration is not supported in this version. Press Enter to continue.")
 
@@ -103,17 +114,22 @@ tester = RobotTester()
 test_submenu = ConsoleMenu("Testing: Select Model")
 
 def tester_main(model:str):
-    acceptance = tester.execute_test_cases()
-    if acceptance:
-        if mfgdb is not None:
-            if user_says_yes("Publish results to cloud?"):
-                device_serial_number = input("Enter serial number: ")
-                if not mfgdb.publish_test_log(os.path.dirname(__file__) + "/../testing/testing_log.json", device_serial_number):
-                    input('Failed to publish results to cloud. Contact your system administrator.')
-            else:
-                input("Did not publish results to cloud. Push Enter to continue.")
-    else:
-        input("One or more problems were encountered during testing. See above. Press Enter to return to menu.")
+    try:
+        acceptance = tester.execute_test_cases()
+        if acceptance:
+            if mfgdb is not None:
+                if user_says_yes("Publish results to cloud?"):
+                    device_serial_number = input("Enter serial number: ")
+                    if not mfgdb.publish_test_log(os.path.dirname(__file__) + "/../testing/testing_log.json", device_serial_number):
+                        input('Failed to publish results to cloud. Contact your system administrator.')
+                else:
+                    input("Did not publish results to cloud. Push Enter to continue.")
+        else:
+            input("One or more problems were encountered during testing. See above. Press Enter to return to menu.")
+    except Exception as e:
+        print('Problem executing testing')
+        print(e)
+        print('press any key to continue')
 
 test_functions = [FunctionItem(robot, tester_main, kwargs={'model':robot}) for robot in robots]
 for func in test_functions:
