@@ -392,7 +392,7 @@
                 "sudo rm -rf ~/.local/bin/ds4drv",
                 "sudo rm -rf /etc/udev/rules.d/50-ds4drv.rules #ps4 udev",
                 "sudo rm -rf /etc/udev/rules.d/55-roverrobotics.rules #rover udev",
-                "sudo rm -rf ~/$KEYV_ROVER_TESTS #robot test",
+                "sudo rm -rf ~/rover_tools/$KEYV_ROVER_TESTS #robot test",
                 "sudo rm -rf /etc/roverrobotics #env",
                 "sudo rm -rf /usr/sbin/roverrobotics #selector",
                 "sudo rm -rf /etc/systemd/system/roscore.service #ros service",
