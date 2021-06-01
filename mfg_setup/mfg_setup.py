@@ -28,11 +28,9 @@ def launch_robot_mode(
         commands = json.load(inputfile)
 
     if model in commands:
-        if mode in commands[model]:
-            for command_set in commands[model][mode]:
-                for _, commands in command_set.items():
-                    build_shell_script(commands)
-                    run_shell_script()
+        if mode in commands[model]:  
+            build_shell_script(commands[model][mode])
+            run_shell_script()
         else:
             raise ValueError('attempted to put the robot into an unknown mode: %s' % mode)
     else:

@@ -4,16 +4,20 @@ import subprocess
 import time
 import json
 import pexpect
+from mfg_setup import mfg_setup
 
 class RobotTester():
     def __init__(self):
         pass
 
-    def execute_test_cases(self):
+    def execute_test_cases(self, model):
         # delete the local test file
         logfile_path = os.path.dirname(os.path.abspath(__file__)) + "/testing_log.json"
         if os.path.exists(logfile_path):
             os.remove(logfile_path)
+
+        # put the robot in the correct mode
+        mfg_setup.launch_robot_mode(model, mode="mfg_mode")
         
         test_script = os.path.dirname(os.path.abspath(__file__)) + "/test_bridge_py2.py"
         test_command = test_script
@@ -40,6 +44,9 @@ class RobotTester():
         print("Errors: %d" % len(results['errors']))
         for error in results['errors']:
             print(error)
+
+        # put the robot in the correct mode
+        mfg_setup.launch_robot_mode(model, mode="normal_mode")
 
         if len(results['failures']) == 0 and len(results['errors']) == 0:
             return True

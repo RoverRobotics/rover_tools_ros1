@@ -116,7 +116,7 @@ test_submenu = ConsoleMenu("Testing: Select Model")
 robots = mfg_setup.get_models()
 def tester_main(model:str):
     try:
-        acceptance = tester.execute_test_cases()
+        acceptance = tester.execute_test_cases(model)
         if acceptance:
             if mfgdb is not None:
                 if user_says_yes("Publish results to cloud?"):
@@ -130,7 +130,7 @@ def tester_main(model:str):
     except Exception as e:
         print('Problem executing testing')
         print(e)
-        print('press any key to continue')
+        input('press any key to continue')
 
 test_functions = [FunctionItem(robot, tester_main, kwargs={'model':robot}) for robot in robots]
 for func in test_functions:
