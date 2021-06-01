@@ -48,6 +48,8 @@ class RobotTester():
         # put the robot in the correct mode
         mfg_setup.launch_robot_mode(model, mode="normal_mode")
 
+        input('press any key to continue')
+
         if len(results['failures']) == 0 and len(results['errors']) == 0:
             return True
         else:
