@@ -1,6 +1,74 @@
+import json
+import os
+import stat
+from subprocess import PIPE, Popen
+import sys
+
 
 class RobotCalibrator():
-    def __init__(self):
-        pass
-    def calibrate(device:str):
-        return True
+    def __init__(self, commands=(os.path.dirname(__file__) + "/calibration_shellscripts.json"),
+                 playbooks=(os.path.dirname(__file__) + "/calibration_playbook.json")):
+        # loads all possible install commands
+        with open(commands, "r") as inputfile:
+            self.commands = json.load(inputfile)
+
+        # load all model-specific install "playbook"
+        with open(playbooks, "r") as inputfile:
+            self.playbooks = json.load(inputfile)
+
+    def set_model(self, model: str):
+        if model not in self.playbooks:
+            raise ValueError(
+                "Invalid robot model %s. No valid plan to install for %s" % (model, model))
+        self.model = model
+
+    def calibrate(self, logfile_location=os.path.dirname(__file__) + "/calibration.log", model=None):
+        if model is not None:
+            self.set_model(model)
+        # open a master install log
+        fout = open(logfile_location, 'wb')
+        fout.close()
+
+        try:
+            for play in self.playbooks[self.model]:
+                for command_set in self.commands[play]:
+                    pass
+        except Exception as e:
+            input("there was an error in the .json install configurations. Check playbooks.json and try again: %s " % e)
+            exit()
+
+        for index, play in enumerate(self.playbooks[self.model]):
+            print("Running calibration command set %d of %d" %
+                  (index+1, len(self.playbooks[self.model])), end=" ")
+            for command_set in self.commands[play]:
+                for command_category, commands in command_set.items():
+                    fout = open(logfile_location, 'a')
+                    fout.write("#Bash command \r\n")
+                    if isinstance(commands, list):
+                        with open("temp.sh", "w") as temp_bash:
+                            for command in commands:
+                                command = self.replace_matched_variables(
+                                    command)
+                                temp_bash.write(command+'\n')
+                                fout.write(command + "\r\n")
+
+                    else:
+                        with open("temp.sh", "w") as temp_bash:
+                            command = self.replace_matched_variables(commands)
+                            temp_bash.write(command+'\n')
+                            fout.write(command + "\r\n")
+
+                    print(".", end="")
+                    fout.write("#Terminal Output \r\n")
+                    os.chmod("temp.sh", stat.S_IROTH | stat.S_IWOTH |
+                             stat.S_IXOTH | stat.S_IRUSR | stat.S_IWUSR | stat.S_IXUSR)
+                    output = Popen("%s" % ("/bin/bash temp.sh"),
+                                   shell=True, stdout=PIPE, stderr=PIPE)
+                    stdout, stderr = output.communicate()
+                    stdout = str(stdout.decode('UTF-8')).replace("\n", "\r\n")
+                    stderr = str(stderr.decode('UTF-8')).replace("\n", "\r\n")
+
+                    fout.write(stdout)
+                    fout.write(stderr)
+                    self.verify_last_()
+            print("")

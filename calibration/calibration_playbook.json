@@ -1,0 +1,38 @@
+{
+    "pro_2WD_ros1": [
+        "stop",
+        "start_pro_2WD_ros1",
+        "kill",
+        "start"
+    ],
+    "pro_4WD_ros1": [
+        "stop",
+        "start_pro_4WD_ros1",
+        "kill",
+        "start"
+    ],
+    "zero_2WD_ros1": [
+        "stop",
+        "start_zero_2WD_ros1",
+        "kill",
+        "start"
+    ],
+    "zero_4WD_ros1": [
+        "stop",
+        "start_zero_4WD_ros1",
+        "kill",
+        "start"
+    ],
+    "mini_ros1": [
+        "stop",
+        "start_mini_ros1",
+        "kill",
+        "start"
+    ],
+    "pro2_ros1": [
+        "stop",
+        "start_pro2_ros1",
+        "kill",
+        "start"
+    ]
+}

@@ -74,8 +74,21 @@ calibrator = RobotCalibrator()
 calibration_submenu = ConsoleMenu("Calibration: Select Model")
 
 def calibration_main(model:str):
-    input("calibration is not supported in this version. Press Enter to continue.")
+    print('Starting calibration, please wait.')
     calibrator.calibrate(model=model)
+    # installer.print_verification_results()
+    input('Calibration complete. Press enter to continue.')
+    if mfgdb is not None:
+        if not user_says_yes("Publish results to cloud?"):
+            return
+        device_serial_number = input("Enter serial number: ")
+        if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
+            raise ValueError('Failed to publish install log to cloud. Halting.')
+
+        verification_file = installer.get_verification_file()
+        if verification_file is not None:
+            if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
+                raise ValueError('Failed to publish verification log to cloud. Halting.')
     #if mfgdb is not None:
     #    input("calibration is not supported in this version. Press Enter to continue.")
 

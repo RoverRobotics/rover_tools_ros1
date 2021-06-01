@@ -1,0 +1,57 @@
+{
+    "stop": [
+        {
+            "stop-rover-services": [
+                "sudo systemctl stop roverrobotics",
+                "sudo systemctl stop roscore"
+            ]
+        }
+    ],
+    "start": [
+        {
+            "start-rover-services": [
+                "sudo systemctl start roverrobotics",
+                "sudo systemctl start roscore"
+            ]
+        }
+    ],
+    "kill":[
+        {
+            "killall":[
+                "killall roscore",
+                "killall rosnode",
+                "killall roslaunch"
+            ]
+        }
+    ],
+    "start_pro_4_WD_ros1": [
+        {
+            "start": "roslaunch roverrobotics_driver mfg_pro_4WD.launch"
+        }
+    ],
+    "start_pro_2_WD_ros1": [
+        {
+            "start": "roslaunch roverrobotics_driver mfg_pro_2WD.launch"
+        }
+    ],
+    "start_pro2_ros1": [
+        {
+            "start": "roslaunch roverrobotics_driver mfg_pro2.launch"
+        }
+    ],
+    "start_mini_ros1": [
+        {
+            "start": "roslaunch roverrobotics_driver mfg_mini.launch"
+        }
+    ],
+    "start_zero_2WD_ros1": [
+        {
+            "start": "roslaunch rr_rover_zero_v2_driver mfg_zero_2_2WD.launch"
+        }
+    ],
+    "start_zero_4WD_ros1": [
+        {
+            "start": "roslaunch rr_rover_zero_v2_driver mfg_zero_2_4WD.launch"
+        }
+    ]
+}
