@@ -1,38 +1,64 @@
 {
-    "pro_2WD_ros1": [
-        "stop",
-        "start_pro_2WD_ros1",
+    "pro_2WD_ros1_setup": [
         "kill",
+        "stop",
+        "start_pro_2WD_ros1"
+    ],
+    "pro_2WD_ros1_resume": [
+        "kill",
+        "stop",
         "start"
     ],
-    "pro_4WD_ros1": [
+    "pro_4WD_ros1_setup": [
+        "kill",
         "stop",
         "start_pro_4WD_ros1",
         "kill",
         "start"
     ],
-    "zero_2WD_ros1": [
-        "stop",
-        "start_zero_2WD_ros1",
+    "pro_4WD_ros1_resume": [
         "kill",
+        "stop",
         "start"
     ],
-    "zero_4WD_ros1": [
-        "stop",
-        "start_zero_4WD_ros1",
+    "zero_2WD_ros1_setup": [
         "kill",
+        "stop",
+        "start_zero_2WD_ros1"
+    ],
+    "zero_2WD_ros1_resume": [
+        "kill",
+        "stop",
         "start"
     ],
-    "mini_ros1": [
-        "stop",
-        "start_mini_ros1",
+    "zero_4WD_ros1_setup": [
         "kill",
+        "stop",
+        "start_zero_2WD_ros1"
+    ],
+    "zero_4WD_ros1_resume": [
+        "kill",
+        "stop",
         "start"
     ],
-    "pro2_ros1": [
-        "stop",
-        "start_pro2_ros1",
+    "mini_ros1_setup": [
         "kill",
+        "stop",
+        "start_mini_ros1"
+    ],
+    "mini_ros1_start": [
+        "kill",
+        "stop",
+        "start"
+    ],
+    "pro2_ros1_setup": [
+        "kill",
+        "stop",
+        "start_pro2_ros1"
+    ],
+    "pro2_ros1_resume": [
+        "kill",
+        "stop",
         "start"
     ]
 }
