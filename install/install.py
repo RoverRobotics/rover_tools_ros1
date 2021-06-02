@@ -128,13 +128,3 @@ class RobotPackageInstaller():
             return self.verification_file_path
         else:
             return None
-
-
-        
-
-if __name__ == "__main__":
-    install = RobotPackageInstaller()
-    install.set_model('mini_ros1')
-    # print(install.get_models())
-    # install.run_install()
-

@@ -21,5 +21,5 @@ class RobotCalibrator():
     def run_calibration(self):
         print("Running %s calibration" % self.model)
 
-    def calibrate(self, model=None):
-        input('the robot %s is calibrated' % self.model)
+    def get_calibration_file(self):
+        return None
