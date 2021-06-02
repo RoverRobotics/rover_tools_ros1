@@ -18,8 +18,10 @@ class RobotCalibrator():
                 "Invalid robot model %s. Cannot calibrate model %s" % (model, model))
         self.model = model
 
+        raise ValueError('this function is not yet implemented')
+
     def run_calibration(self):
-        print("Running %s calibration" % self.model)
+        raise ValueError('this function is not yet implemented')
 
     def get_calibration_file(self):
-        return None
+        raise ValueError('this function is not yet implemented')
