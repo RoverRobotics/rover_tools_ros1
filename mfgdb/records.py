@@ -138,7 +138,7 @@ class DeviceInformation():
 
         self.device_data = {}
         with open(required_fields_file, "r") as f:
-            self.required_fields = json.load(f)
+            self.required_fields = json.load(f)["MandatoryColumns"]
 
         self.device_data = {k:None for k in self.required_fields}
 
