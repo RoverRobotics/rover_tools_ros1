@@ -36,7 +36,7 @@
                 "sudo systemctl stop roverrobotics",
                 "killall roslaunch",
                 "source ~/catkin_ws/devel/setup.bash",
-                "screen -dm bash -c \"roslaunch rr_zero_v2_driver mfg_zero_2_2WD.launch\""
+                "screen -dm bash -c \"roslaunch rr_rover_zero_v2_driver mfg_zero_2_2WD.launch\""
             ],
             "normal_mode": [
                 "killall roslaunch",
@@ -52,7 +52,7 @@
                 "sudo systemctl stop roverrobotics",
                 "killall roslaunch",
                 "source ~/catkin_ws/devel/setup.bash",
-                "screen -dm bash -c \"roslaunch rr_zero_v2_driver mfg_zero_2_4WD.launch\""
+                "screen -dm bash -c \"roslaunch rr_rover_zero_v2_driver mfg_zero_2_4WD.launch\""
             ],
             "normal_mode": [
                 "killall roslaunch",
