@@ -9,7 +9,7 @@ from consolemenu import *
 from consolemenu.items import *
 import json
 from install.install import RobotPackageInstaller
-from mfgdb.records import ManufacturingRecordDb
+from mfgdb.records import ManufacturingRecordDb, DeviceInformation
 from testing.test_bridge import RobotTester
 from mfg_setup import mfg_setup
 from calibration.calibration import RobotCalibrator
@@ -129,10 +129,24 @@ for func in test_functions:
 
 test_submenu_item = SubmenuItem("Test", test_submenu, menu)
 
-# register 
+# register device data
+device_info = DeviceInformation()
 
+def device_info_main():
+    try:
+        if device_info.query_user():
+            input('test, but this is where we would publish to the cloud')
+    except Exception as e:
+        print('Problem during data entry')
+        print(e)
+        input('press any key to continue')
+
+device_info_function = FunctionItem("Register Device", device_info_main)
+
+# build GUI
 menu.append_item(install_submenu_item)
-#menu.append_item(calibration_submenu_item)
+if mfgdb is not None:
+    menu.append_item(device_info_function)
 menu.append_item(test_submenu_item)
 
 # Finally, we call show to show the menu and allow the user to interact
