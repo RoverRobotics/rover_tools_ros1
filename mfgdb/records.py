@@ -145,7 +145,7 @@ class DeviceInformation():
     def query_user(self):
         print('Please enter the following data...')
         for field in self.required_fields:
-            self.device_data[field] = input("%s: ")
+            self.device_data[field] = input("%s: " % field)
             
     def user_confirms_data(self):
         print('Please confirm the data below...')
