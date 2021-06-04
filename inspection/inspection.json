@@ -5,74 +5,74 @@
     "Zero2":[
         {
             "Description": "No scratches, scuffs, gouges, dents",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Verify correction installation of payload inserts",
-            "Specification": [14]
+            "Specification": 14
         },
         {
             "Description": "Verify installation of skid plate screws",
-            "Specification": [20]
+            "Specification": 20
         },
         {
             "Description": "Verify no loose hardware in system",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Verify motor noise level db",
-            "Specification": [[0, 78]]
+            "Specification": [0, 78]
         },
         {
             "Description": "Basic drive test",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Minimum open loop turn speed",
-            "Specification": [[0.001, 0.25]]
+            "Specification": [0.001, 0.25]
         }
         
     ],
     "Zero2Coco":[
         {
             "Description": "No scratches, scuffs, gouges, dents",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Verify correction installation of payload inserts",
-            "Specification": [14]
+            "Specification": 14
         },
         {
             "Description": "Verify installation of skid plate screws",
-            "Specification": [20]
+            "Specification": 20
         },
         {
             "Description": "Verify no loose hardware in system",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Verify motor noise level db",
-            "Specification": [[0, 78]]
+            "Specification": [0, 78]
         },
         {
             "Description": "Basic drive test",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Minimum open loop turn speed",
-            "Specification": [[0.001, 0.25]]
+            "Specification": [0.001, 0.25]
         },
         {
             "Description": "Verify power cable has bare leads",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Verify battery bay material removal",
-            "Specification": [true]
+            "Specification": true
         },
         {
             "Description": "Verify battery cable length is able to be held flush against battery bay cutout",
-            "Specification": [true]
+            "Specification": true
         }
     ]
 }

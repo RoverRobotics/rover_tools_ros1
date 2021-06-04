@@ -14,6 +14,7 @@ from testing.test_bridge import RobotTester
 from mfg_setup import mfg_setup
 from calibration.calibration import RobotCalibrator
 from shared.utils import user_says_yes
+from inspection.inspection import ManualInspection
 
 with open(os.path.dirname(__file__) + "/tool_version.json", "r") as version_file:
     tool_version = json.load(version_file)['ToolVersion']
@@ -78,6 +79,30 @@ for func in install_functions:
     install_submenu.append_item(func)
 
 install_submenu_item = SubmenuItem("Install", install_submenu, menu)
+
+# inspection
+inspection_mgr = ManualInspection()
+robots = inspection_mgr.get_models()
+inspect_submenu = ConsoleMenu("Inspection: Select Model")
+
+def inspection_main(model:str):
+    try:
+        print('Starting inspection, please wait.')
+        inspection_mgr.run_inspection(model)
+        
+        if mfgdb is not None:
+            print('do stuff')
+
+    except Exception as e:
+        print('Inspection FAILURE')
+        print(e)
+        input('press any key to continue.')
+
+inspect_functions = [FunctionItem(robot, inspection_main, kwargs={"model":robot}) for robot in robots]
+for func in inspect_functions:
+    inspect_submenu.append_item(func)
+
+inspect_submenu_item = SubmenuItem("Inspection", inspect_submenu, menu)
 
 # calibration
 calibrator = RobotCalibrator()
@@ -161,6 +186,8 @@ device_info_function = FunctionItem("Register Device", device_info_main)
 # build GUI
 if mfgdb is not None:
     menu.append_item(serial_number_function)
+if mfgdb is not None:
+    menu.append_item(inspect_submenu_item)
 menu.append_item(install_submenu_item)
 menu.append_item(calibration_submenu_item)
 menu.append_item(test_submenu_item)

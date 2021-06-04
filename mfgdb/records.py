@@ -152,8 +152,6 @@ class ManufacturingRecordDb():
 
         return max(sns) + 1
 
-
-
 class DeviceInformation():
     def __init__(self, required_fields_file =(os.path.dirname(__file__) + "/db_info.json")):
 
@@ -184,10 +182,6 @@ class DeviceInformation():
     def get_entered_data(self):
         return self.device_data
 
-
-class ManualInspection():
-    def __init__(self, model, inspection_file=(os.path.dirname(__file__) + "/inspection.json")):
-        
 
 if __name__ == '__main__':
     pass
