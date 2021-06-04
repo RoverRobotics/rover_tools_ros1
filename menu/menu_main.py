@@ -15,7 +15,6 @@ from mfg_setup import mfg_setup
 from calibration.calibration import RobotCalibrator
 from shared.utils import user_says_yes
 
-
 with open(os.path.dirname(__file__) + "/tool_version.json", "r") as version_file:
     tool_version = json.load(version_file)['ToolVersion']
 
@@ -31,6 +30,20 @@ else:
 
 # start with no serial number
 device_serial_number = None
+
+# serial number utility
+
+def issue_serial_number():
+    try:
+        nas = mfgdb.get_next_available_serial()
+        print('The next available serial number is: %s' % str(nas))
+        input('press any key to continue')
+    except Exception as e:
+        print('Problem while finding next available serial number from mfg db...')
+        print(e)
+        input('press any key to continue')
+
+serial_number_function = FunctionItem("Issue Serial Number", issue_serial_number)
 
 # installer
 robots = RobotPackageInstaller.get_models()
@@ -73,7 +86,7 @@ robots = mfg_setup.get_models()
 def calibration_main(model:str):
     try:
         print('Starting calibration, please wait.')
-        calibrator.calibrate(model=model)
+        calibrator.run_calibration(model=model)
         # installer.print_verification_results()
         input('Calibration complete. Press enter to continue.')
         if mfgdb is not None:
@@ -146,6 +159,8 @@ def device_info_main():
 device_info_function = FunctionItem("Register Device", device_info_main)
 
 # build GUI
+if mfgdb is not None:
+    menu.append_item(serial_number_function)
 menu.append_item(install_submenu_item)
 menu.append_item(calibration_submenu_item)
 menu.append_item(test_submenu_item)

@@ -20,7 +20,7 @@ class RobotCalibrator():
 
         raise ValueError('this function is not yet implemented')
 
-    def run_calibration(self):
+    def run_calibration(self, model):
         raise ValueError('this function is not yet implemented')
 
     def get_calibration_file(self):

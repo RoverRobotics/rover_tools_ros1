@@ -133,7 +133,25 @@ class ManufacturingRecordDb():
         return True
 
     def get_next_available_serial(self):
-        raise ValueError('not yet implemented')
+        table = self.dynamodb.Table("ManufacturingRecords")
+        scan_kwargs = {}
+        done = False
+        start_key = None
+        responses = list()
+        while not done:
+            if start_key:
+                scan_kwargs['ExclusiveStartKey'] = start_key
+            response = table.scan(**scan_kwargs)
+            responses.extend(response.get('Items', None))
+            start_key = response.get('LastEvaluatedKey', None)
+            done = start_key is None
+
+        sns = list()
+        for item in responses:
+            sns.append(int(item['SerialNumber']))
+
+        return max(sns) + 1
+
 
 
 class DeviceInformation():
