@@ -134,10 +134,10 @@ device_info = DeviceInformation()
 
 def device_info_main():
     try:
-        if device_info.query_user():
-            if device_info.user_confirms_data_():
-                if not mfgdb.register_robot(device_info.get_entered_data()):
-                    raise ValueError('did not publish device data to cloud')
+        device_info.query_user()
+        if device_info.user_confirms_data_():
+            if not mfgdb.register_robot(device_info.get_entered_data()):
+                raise ValueError('did not publish device data to cloud')
     except Exception as e:
         print('Problem during data entry')
         print(e)
@@ -147,9 +147,10 @@ device_info_function = FunctionItem("Register Device", device_info_main)
 
 # build GUI
 menu.append_item(install_submenu_item)
+menu.append_item(calibration_submenu_item)
+menu.append_item(test_submenu_item)
 if mfgdb is not None:
     menu.append_item(device_info_function)
-menu.append_item(test_submenu_item)
 
 # Finally, we call show to show the menu and allow the user to interact
 menu.show()
