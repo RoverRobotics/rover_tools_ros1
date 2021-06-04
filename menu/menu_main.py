@@ -13,16 +13,7 @@ from mfgdb.records import ManufacturingRecordDb
 from testing.test_bridge import RobotTester
 from mfg_setup import mfg_setup
 from calibration.calibration import RobotCalibrator
-
-def user_says_yes(question:str):
-    user_input = None
-    while user_input != 'y' and user_input != 'n':
-        user_input = input(question + " (y/n):")
-
-    if user_input == 'y':
-        return True
-    else:
-        return False
+from shared.utils import user_says_yes
 
 
 with open(os.path.dirname(__file__) + "/tool_version.json", "r") as version_file:

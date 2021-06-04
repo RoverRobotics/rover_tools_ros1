@@ -1,6 +1,7 @@
 import boto3
 import os
 import json
+from shared.utils import user_says_yes
 
 class ManufacturingRecordDb():
     def __init__(
@@ -132,7 +133,32 @@ class ManufacturingRecordDb():
         return True
 
 
-                
+class DeviceInformation():
+    def __init__(self, required_fields_file =(os.path.dirname(__file__) + "/db_info.json")):
+
+        self.device_data = {}
+        with open(required_fields_file, "r") as f:
+            self.required_fields = json.load(f)
+
+        self.device_data = {k:None for k in self.required_fields}
+
+    def query_user(self):
+        print('Please enter the following data...')
+        for field in self.required_fields:
+            self.device_data[field] = input("%s: ")
+            
+    def user_confirms_data(self):
+        print('Please confirm the data below...')
+
+        for k, v in self.device_data.items():
+            print("%s: %s" % (k, v))
+
+        if not user_says_yes("Data correct?"):
+            print('please run data entry again...')
+            input('press any key to continue')
+            return False
+        else:
+            return True
 
 if __name__ == '__main__':
     pass
