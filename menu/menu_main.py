@@ -135,7 +135,9 @@ device_info = DeviceInformation()
 def device_info_main():
     try:
         if device_info.query_user():
-            input('test, but this is where we would publish to the cloud')
+            if device_info.user_confirms_data_():
+                if not mfgdb.register_robot(device_info.get_entered_data()):
+                    raise ValueError('did not publish device data to cloud')
     except Exception as e:
         print('Problem during data entry')
         print(e)

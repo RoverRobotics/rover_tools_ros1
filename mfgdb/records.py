@@ -132,6 +132,9 @@ class ManufacturingRecordDb():
 
         return True
 
+    def get_next_available_serial(self):
+        raise ValueError('not yet implemented')
+
 
 class DeviceInformation():
     def __init__(self, required_fields_file =(os.path.dirname(__file__) + "/db_info.json")):
@@ -147,7 +150,7 @@ class DeviceInformation():
         for field in self.required_fields:
             self.device_data[field] = input("%s: " % field)
             
-    def user_confirms_data(self):
+    def user_confirms_data_(self):
         print('Please confirm the data below...')
 
         for k, v in self.device_data.items():
@@ -159,6 +162,9 @@ class DeviceInformation():
             return False
         else:
             return True
+
+    def get_entered_data(self):
+        return self.device_data
 
 if __name__ == '__main__':
     pass
