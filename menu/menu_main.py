@@ -15,6 +15,10 @@ from mfg_setup import mfg_setup
 from calibration.calibration import RobotCalibrator
 from shared.utils import user_says_yes
 from inspection.inspection import ManualInspection
+from menu.menu_install import build_install_submenu
+from menu.menu_serial_number import build_serial_number_function
+from menu.menu_inspection import build_inspection_submenu
+from menu.menu_calibration import build_calibration_submenu
 
 with open(os.path.dirname(__file__) + "/tool_version.json", "r") as version_file:
     tool_version = json.load(version_file)['ToolVersion']
@@ -32,115 +36,8 @@ else:
 # start with no serial number
 device_serial_number = None
 
-# serial number utility
-
-def issue_serial_number():
-    try:
-        nas = mfgdb.get_next_available_serial()
-        print('The next available serial number is: %s' % str(nas))
-        input('press any key to continue')
-    except Exception as e:
-        print('Problem while finding next available serial number from mfg db...')
-        print(e)
-        input('press any key to continue')
-
-serial_number_function = FunctionItem("Issue Serial Number", issue_serial_number)
-
-# installer
-robots = RobotPackageInstaller.get_models()
-installer = RobotPackageInstaller()
-install_submenu = ConsoleMenu("Installation: Select Model")
-
-def installer_main(model:str):
-    try:
-        print('Starting install, please wait.')
-        installer.run_install(model=model, verification_file_header="tool version: " + tool_version)
-        installer.print_verification_results()
-        input('Installation complete. Press enter to continue.')
-        if mfgdb is not None:
-            if not user_says_yes("Publish results to cloud?"):
-                return
-            device_serial_number = input("Enter serial number: ")
-            if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
-                raise ValueError('Failed to publish install log to cloud. Halting.')
-
-            verification_file = installer.get_verification_file()
-            if verification_file is not None:
-                if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
-                    raise ValueError('Failed to publish verification log to cloud. Halting.')
-    except Exception as e:
-        print('Install FAILURE')
-        print(e)
-        input('press any key to continue.')
-
-
-install_functions = [FunctionItem(robot, installer_main, kwargs={"model":robot}) for robot in robots]
-for func in install_functions:
-    install_submenu.append_item(func)
-
-install_submenu_item = SubmenuItem("Install", install_submenu, menu)
-
-# inspection
-inspection_mgr = ManualInspection()
-robots = inspection_mgr.get_models()
-inspect_submenu = ConsoleMenu("Inspection: Select Model")
-
-def inspection_main(model:str):
-    try:
-        print('Starting manual inspection procedure, please wait.')
-        results = inspection_mgr.run_inspection(model)
-
-        print('')
-        print('INSPECTION RESULTS: ')
-        print('')
-        for name, result in results.items():
-            print("%s: %s" % (name, result))
-
-        print('')
-        input('inspection complete, press any key to continue')
-        
-        if mfgdb is not None:
-            if not user_says_yes("Publish results to cloud?"):
-                return
-
-    except Exception as e:
-        print('Inspection FAILURE')
-        print(e)
-        input('press any key to continue.')
-
-inspect_functions = [FunctionItem(robot, inspection_main, kwargs={"model":robot}) for robot in robots]
-for func in inspect_functions:
-    inspect_submenu.append_item(func)
-
-inspect_submenu_item = SubmenuItem("Inspection", inspect_submenu, menu)
-
 # calibration
-calibrator = RobotCalibrator()
-calibration_submenu = ConsoleMenu("Calibration: Select Model")
-robots = mfg_setup.get_models()
-def calibration_main(model:str):
-    try:
-        print('Starting calibration, please wait.')
-        calibrator.run_calibration(model=model)
-        # installer.print_verification_results()
-        input('Calibration complete. Press enter to continue.')
-        if mfgdb is not None:
-            if not user_says_yes("Publish results to cloud?"):
-                return
-            print('do stuff here in the future')
-    except Exception as e:
-        print('Calibration FAILURE')
-        print(e)
-        input('press any key to continue.')
 
-    #if mfgdb is not None:
-    #    input("calibration is not supported in this version. Press Enter to continue.")
-
-calibration_functions = [FunctionItem(robot, calibration_main, kwargs={"model":robot}) for robot in robots]
-for func in calibration_functions:
-    calibration_submenu.append_item(func)
-
-calibration_submenu_item = SubmenuItem("Calibrate", calibration_submenu, menu)
 
 # tester
 tester = RobotTester()
@@ -188,11 +85,11 @@ device_info_function = FunctionItem("Register Device", device_info_main)
 
 # build GUI
 if mfgdb is not None:
-    menu.append_item(serial_number_function)
+    menu.append_item(build_serial_number_function(mfgdb))
 if mfgdb is not None:
-    menu.append_item(inspect_submenu_item)
-menu.append_item(install_submenu_item)
-menu.append_item(calibration_submenu_item)
+    menu.append_item(build_inspection_submenu(menu, mfgdb))
+menu.append_item(build_install_submenu(menu, mfgdb))
+menu.append_item(build_calibration_submenu(menu, mfgdb))
 menu.append_item(test_submenu_item)
 if mfgdb is not None:
     menu.append_item(device_info_function)
