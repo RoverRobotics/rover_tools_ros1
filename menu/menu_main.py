@@ -8,7 +8,7 @@ print(sys.path)
 from consolemenu import *
 from consolemenu.items import *
 import json
-from mfgdb.records import ManufacturingRecordDb, DeviceInformation
+from mfgdb.records import ManufacturingRecordDb
 from menu.menu_install import build_install_submenu
 from menu.menu_serial_number import build_serial_number_function
 from menu.menu_inspection import build_inspection_submenu
@@ -28,8 +28,6 @@ if launch_production_menu:
     menu = ConsoleMenu("Rover Tools v%s" % tool_version, "Internal Use")
 else:
     menu = ConsoleMenu("Rover Tools v%s" % tool_version, "Customer Tools")
-
-
 
 # build GUI below ..............
 

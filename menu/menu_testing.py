@@ -3,6 +3,7 @@ from consolemenu.items import *
 from testing.test_bridge import RobotTester
 from shared.utils import user_says_yes
 from mfg_setup import mfg_setup
+import os
 
 def build_testing_submenu(menu, mfgdb=None):
     tester = RobotTester()
