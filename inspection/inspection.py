@@ -13,6 +13,8 @@ class ManualInspection():
         return self.inspection_procedure.keys()
 
     def run_inspection(self, model):
+
+        self.results = {}
         if model not in self.get_models():
             raise ValueError("cannot run inspection for %s: invalid model" % model)
 
@@ -26,25 +28,31 @@ class ManualInspection():
                     self.results[inspection_task["Description"]] = "Fail"
 
             # range type question
-            if isinstance(inspection_task["Specification"], list):
+            elif isinstance(inspection_task["Specification"], list):
                 print(inspection_task["Description"])
                 print('acceptable range: ', inspection_task["Specification"])
-                user_value = input('actual: ')
+                user_value = float(input('actual: '))
                 if inspection_task["Specification"][0] < user_value and user_value < inspection_task["Specification"][1]:
                     self.results[inspection_task["Description"]] = "Pass"
                 else:
                     self.results[inspection_task["Description"]] = "Fail"
 
             # single value type question
-            if isinstance(inspection_task["Specification"], int) or isinstance(inspection_task["Specification"], float):
+            elif isinstance(inspection_task["Specification"], int) or isinstance(inspection_task["Specification"], float):
                 print(inspection_task["Description"])
                 print('expected value: ', inspection_task["Specification"])
 
-                user_value = input('actual: ')
+                user_value = float(input('actual: '))
                 if user_value == inspection_task["Specification"]:
                     self.results[inspection_task["Description"]] = "Pass"
                 else:
                     self.results[inspection_task["Description"]] = "Fail"
+            else:
+                raise ValueError('Unknown type for specification: %s' % inspection_task["Specification"])
+
+            print('')
+
+        return self.results
 
 
 

@@ -87,8 +87,17 @@ inspect_submenu = ConsoleMenu("Inspection: Select Model")
 
 def inspection_main(model:str):
     try:
-        print('Starting inspection, please wait.')
-        inspection_mgr.run_inspection(model)
+        print('Starting manual inspection procedure, please wait.')
+        results = inspection_mgr.run_inspection(model)
+
+        print('')
+        print('INSPECTION RESULTS: ')
+        print('')
+        for name, result in results.items():
+            print("%s: %s" % (name, result))
+
+        print('')
+        input('inspection complete, press any key to continue')
         
         if mfgdb is not None:
             print('do stuff')
