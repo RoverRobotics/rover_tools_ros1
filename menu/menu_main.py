@@ -100,7 +100,8 @@ def inspection_main(model:str):
         input('inspection complete, press any key to continue')
         
         if mfgdb is not None:
-            print('do stuff')
+            if not user_says_yes("Publish results to cloud?"):
+                return
 
     except Exception as e:
         print('Inspection FAILURE')
@@ -126,14 +127,7 @@ def calibration_main(model:str):
         if mfgdb is not None:
             if not user_says_yes("Publish results to cloud?"):
                 return
-            device_serial_number = input("Enter serial number: ")
-            if not mfgdb.publish_install_log(os.path.dirname(__file__) + "/../install/install.log", device_serial_number):
-                raise ValueError('Failed to publish install log to cloud. Halting.')
-
-            verification_file = installer.get_verification_file()
-            if verification_file is not None:
-                if not mfgdb.publish_install_log(verification_file, "verify_" + device_serial_number):
-                    raise ValueError('Failed to publish verification log to cloud. Halting.')
+            print('do stuff here in the future')
     except Exception as e:
         print('Calibration FAILURE')
         print(e)
