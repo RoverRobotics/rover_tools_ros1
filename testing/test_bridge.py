@@ -10,9 +10,8 @@ class RobotTester():
     def __init__(self):
         pass
 
-    def execute_test_cases(self, model):
+    def execute_test_cases(self, model, logfile_path=os.path.dirname(os.path.abspath(__file__)) + "/testing_log.json"):
         # delete the local test file
-        logfile_path = os.path.dirname(os.path.abspath(__file__)) + "/testing_log.json"
         if os.path.exists(logfile_path):
             os.remove(logfile_path)
 

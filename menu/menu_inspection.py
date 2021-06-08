@@ -11,20 +11,20 @@ def build_inspection_submenu(menu, mfgdb=None):
     def inspection_main(model:str):
         try:
             print('Starting manual inspection procedure, please wait.')
-            results = inspection_mgr.run_inspection(model)
+            inspection_passed = inspection_mgr.run_inspection(model)
 
-            print('')
-            print('INSPECTION RESULTS: ')
-            print('')
-            for name, result in results.items():
-                print("%s: %s" % (name, result))
-
+            inspection_mgr.print_summary()
             print('')
             input('inspection complete, press any key to continue')
             
             if mfgdb is not None:
-                if not user_says_yes("Publish results to cloud?"):
-                    return
+                if user_says_yes("Publish results to cloud?"):
+                    if not inspection_passed:
+                        if user_says_yes("There were one or more failures. Are you sure you want to publish these results?"):
+                            print('do something')
+
+                return
+                    
 
         except Exception as e:
             print('Inspection FAILURE')
