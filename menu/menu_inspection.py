@@ -1,9 +1,10 @@
+from mfgdb.records import ManufacturingRecordDb
 from consolemenu import *
 from consolemenu.items import *
 from inspection.inspection import ManualInspection
 from shared.utils import user_says_yes
 
-def build_inspection_submenu(menu, mfgdb=None):
+def build_inspection_submenu(menu, mfgdb:ManufacturingRecordDb=None):
     inspection_mgr = ManualInspection()
     robots = inspection_mgr.get_models()
     inspect_submenu = ConsoleMenu("Inspection: Select Model")
@@ -20,11 +21,13 @@ def build_inspection_submenu(menu, mfgdb=None):
             if mfgdb is not None:
                 if user_says_yes("Publish results to cloud?"):
                     if not inspection_passed:
-                        if user_says_yes("There were one or more failures. Are you sure you want to publish these results?"):
-                            print('do something')
+                        if not user_says_yes("There were one or more failures. Are you sure you want to publish these results?"):
+                            return
 
+                    serial = str(input('Enter serial number: '))
+                    if not mfgdb.publish_inspection_log(inspection_mgr.get_results_file(), serial):
+                        raise ValueError('Failed to publish verification log to cloud. Halting.')
                 return
-                    
 
         except Exception as e:
             print('Inspection FAILURE')

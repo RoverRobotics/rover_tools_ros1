@@ -106,6 +106,16 @@ class ManufacturingRecordDb():
             return False
 
         return True
+
+    def publish_inspection_log(self, logfile_path:str, serial_number:str):
+        try:
+            response = self.s3.upload_file(logfile_path, "rr-inspection-logs", "inspection_" + serial_number + ".json")
+            print(response)
+        except Exception as e:
+            print('Failed to publish log %s' % e)
+            return False
+
+        return True
     
 
     def get_local_credentials(credential_file=("/media/rover/install_stick/credentials.json")):

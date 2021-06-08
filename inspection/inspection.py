@@ -62,7 +62,7 @@ class ManualInspection():
 
         return True
 
-    def get_inspection_file(self):
+    def get_results_file(self):
         return self.results_file
 
     def print_summary(self):
