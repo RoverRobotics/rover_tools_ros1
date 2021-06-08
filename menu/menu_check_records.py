@@ -17,8 +17,21 @@ def build_records_submenu(menu, mfgdb:ManufacturingRecordDb):
             print(e)
             input('press any key to continue.')
 
+    def view_records():
+        try:
+            serialnum = str(input("Enter serial number: "))
+            _ = mfgdb.download_db_entries(serialnum=serialnum)
+            input('press any key to continue')
+        except Exception as e:
+            print('Records FAILURE')
+            print(e)
+            input('press any key to continue.')
+
     
-    records_functions = [FunctionItem('Check DB records for SN', check_records)]
+    records_functions = [
+        FunctionItem('Check DB records for SN', check_records),
+        FunctionItem('View Records', view_records)]
+    
     for func in records_functions:
         records_submenu.append_item(func)
 

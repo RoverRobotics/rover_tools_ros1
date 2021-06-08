@@ -190,6 +190,35 @@ class ManufacturingRecordDb():
             else:
                 raise ValueError('Error while reading DB...')
 
+    def download_db_entries(self, serialnum, dl_directory="~/Downloads/"):
+        entries = self.check_db_entries()
+
+        for entry, _ in entries.items():
+            if os.path.exists(dl_directory + entry):
+                os.remove(dl_directory + entry)
+
+        files = {}
+        for entry, present in entries.items():
+            if present == "Y":
+                files[entry] = dl_directory + entry
+                if entry == "inspection":
+                    self.s3.download_file("rr-inspection-logs", "inspection_" + serialnum + ".json", dl_directory + entry)
+                elif entry == "install":
+                    self.s3.download_file("rr-install-logs", serialnum + ".log", dl_directory + entry)
+                    self.s3.download_file("rr-install-logs", "verify_" + serialnum + ".log", dl_directory + entry)
+                elif entry == "testing":
+                    self.s3.download_file("rr-mfg-test-logs", "log_" + serialnum + ".json", dl_directory + entry)
+                elif entry == "registration":
+                    with open(dl_directory + entry, "w") as f:
+                        json.dump(self.get_robot_information(serialnum), f)
+
+        return
+
+                
+
+
+
+
 class DeviceInformation():
     def __init__(self, required_fields_file =(os.path.dirname(__file__) + "/db_info.json")):
 
