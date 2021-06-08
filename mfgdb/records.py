@@ -1,4 +1,5 @@
 import boto3
+from botocore.exceptions import ClientError
 import os
 import json
 from shared.utils import user_says_yes
@@ -53,7 +54,7 @@ class ManufacturingRecordDb():
         )
 
         if 'Item' not in response:
-            print("Serial Number %s not found in DB!" % serial_number)
+            print("Serial Number %s not found in registration db." % serial_number)
             return None
         
         print("ROBOT INFORMATION FOR SERIAL %s" % response['Item']['SerialNumber'])
@@ -161,6 +162,33 @@ class ManufacturingRecordDb():
             sns.append(int(item['SerialNumber']))
 
         return max(sns) + 1
+
+    def check_db_entries(self, serialnum):
+        entries = {
+            "inspection": "Y" if self.check_file_exists_in_bucket_("rr-inspection-logs", "inspection_" + serialnum + ".json") else "__",
+            "install_log": "Y" if self.check_file_exists_in_bucket_("rr-install-logs", serialnum + ".log") else "__",
+            "verify_install": "Y" if self.check_file_exists_in_bucket_("rr-install-logs", "verify_" + serialnum + ".log") else "__",
+            "testing": "Y" if self.check_file_exists_in_bucket_("rr-mfg-test-logs", "log_" + serialnum + ".json") else "__",
+            "registration": "Y" if self.get_robot_information(serialnum) is not None else "__"
+        }
+        print('')
+        print('db entries for %s: ' % serialnum)
+        for name, value in entries.items():
+            print("%s: %s" % (name, value))
+
+        print('')
+        return entries
+    
+    def check_file_exists_in_bucket_(self, bucket:str, file:str):
+        
+        try:
+            self.s3.get_object(Bucket=bucket, Key=file)
+            return True
+        except ClientError as e:
+            if e.response["Error"]["Code"] == 'NoSuchKey':
+                return False
+            else:
+                raise ValueError('Error while reading DB...')
 
 class DeviceInformation():
     def __init__(self, required_fields_file =(os.path.dirname(__file__) + "/db_info.json")):

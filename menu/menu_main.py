@@ -15,6 +15,7 @@ from menu.menu_inspection import build_inspection_submenu
 from menu.menu_calibration import build_calibration_submenu
 from menu.menu_testing import build_testing_submenu
 from menu.menu_registration import build_device_registration_function
+from menu.menu_check_records import build_records_submenu
 
 with open(os.path.dirname(__file__) + "/tool_version.json", "r") as version_file:
     tool_version = json.load(version_file)['ToolVersion']
@@ -51,6 +52,9 @@ menu.append_item(build_testing_submenu(menu, mfgdb))
 # device registration
 if launch_production_menu:
     menu.append_item(build_device_registration_function(mfgdb))
+
+if launch_production_menu:
+    menu.append_item(build_records_submenu(menu, mfgdb))
 
 # Finally, we call show to show the menu and allow the user to interact
 menu.show()
