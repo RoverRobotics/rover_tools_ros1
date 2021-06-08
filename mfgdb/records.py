@@ -163,6 +163,21 @@ class ManufacturingRecordDb():
 
         return max(sns) + 1
 
+    def register_sn(self, serialnum):
+        # push item to db
+        self.table.put_item(
+            Item={"SerialNumber": str(serialnum)}
+        )
+
+        # validate that the item was pushed successfully
+        confirmation = self.get_robot_information(str(serialnum))
+        if confirmation is not None:
+            print('serial %s successfully added to manufacturing db' % serialnum)
+        else:
+            print('Failed to add serial number to mfg DB. Contact Engineering for help')
+
+        return confirmation
+
     def check_db_entries(self, serialnum):
         entries = {
             "inspection": "Y" if self.check_file_exists_in_bucket_("rr-inspection-logs", "inspection_" + serialnum + ".json") else "__",
