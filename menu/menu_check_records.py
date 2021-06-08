@@ -2,6 +2,7 @@ from consolemenu import *
 from consolemenu.items import *
 from mfgdb.records import ManufacturingRecordDb
 from shared.utils import user_says_yes
+import pexpect
 
 def build_records_submenu(menu, mfgdb:ManufacturingRecordDb):
     
@@ -20,7 +21,12 @@ def build_records_submenu(menu, mfgdb:ManufacturingRecordDb):
     def view_records():
         try:
             serialnum = str(input("Enter serial number: "))
-            _ = mfgdb.download_db_entries(serialnum=serialnum)
+            files = mfgdb.download_db_entries(serialnum=serialnum)
+
+            for filename, path in files.items():
+                if user_says_yes("View %s" % filename):
+                    in_terminal_program = pexpect.spawn("nano " + path)
+                    in_terminal_program.interact()
             input('press any key to continue')
         except Exception as e:
             print('Records FAILURE')
