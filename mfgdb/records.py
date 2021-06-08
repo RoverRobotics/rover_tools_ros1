@@ -166,7 +166,7 @@ class ManufacturingRecordDb():
     def check_db_entries(self, serialnum):
         entries = {
             "inspection": "Y" if self.check_file_exists_in_bucket_("rr-inspection-logs", "inspection_" + serialnum + ".json") else "__",
-            "install_log": "Y" if self.check_file_exists_in_bucket_("rr-install-logs", serialnum + ".log") else "__",
+            "install": "Y" if self.check_file_exists_in_bucket_("rr-install-logs", serialnum + ".log") else "__",
             "verify_install": "Y" if self.check_file_exists_in_bucket_("rr-install-logs", "verify_" + serialnum + ".log") else "__",
             "testing": "Y" if self.check_file_exists_in_bucket_("rr-mfg-test-logs", "log_" + serialnum + ".json") else "__",
             "registration": "Y" if self.get_robot_information(serialnum) is not None else "__"
@@ -190,29 +190,36 @@ class ManufacturingRecordDb():
             else:
                 raise ValueError('Error while reading DB...')
 
-    def download_db_entries(self, serialnum, dl_directory="~/Downloads/"):
-        entries = self.check_db_entries()
+    def download_db_entries(self, serialnum:str, dl_directory=os.path.join(os.path.expanduser("~"), "Downloads/")):
+        serialnum = str(serialnum)
+        entries = self.check_db_entries(serialnum)
 
         for entry, _ in entries.items():
-            if os.path.exists(dl_directory + entry):
-                os.remove(dl_directory + entry)
+            if os.path.isfile(dl_directory + entry + ".rrfile"):
+                os.remove(dl_directory + entry + ".rrfile")
 
         files = {}
         for entry, present in entries.items():
             if present == "Y":
-                files[entry] = dl_directory + entry
+                filename = dl_directory + entry + ".rrfile"
+                files[entry] = filename
                 if entry == "inspection":
-                    self.s3.download_file("rr-inspection-logs", "inspection_" + serialnum + ".json", dl_directory + entry)
+                    with open(filename, "w") as f:
+                        self.s3.download_file("rr-inspection-logs", "inspection_" + serialnum + ".json", filename)
                 elif entry == "install":
-                    self.s3.download_file("rr-install-logs", serialnum + ".log", dl_directory + entry)
-                    self.s3.download_file("rr-install-logs", "verify_" + serialnum + ".log", dl_directory + entry)
+                    with open(filename, "w") as f:
+                        self.s3.download_file("rr-install-logs", serialnum + ".log", filename)
+                elif entry == "verify_install": 
+                    with open(filename, "w") as f:
+                        self.s3.download_file("rr-install-logs", "verify_" + serialnum + ".log", filename)
                 elif entry == "testing":
-                    self.s3.download_file("rr-mfg-test-logs", "log_" + serialnum + ".json", dl_directory + entry)
+                    with open(filename, "w") as f:
+                        self.s3.download_file("rr-mfg-test-logs", "log_" + serialnum + ".json", filename)
                 elif entry == "registration":
-                    with open(dl_directory + entry, "w") as f:
-                        json.dump(self.get_robot_information(serialnum), f)
+                    with open(filename, "w") as f:
+                        json.dump(self.get_robot_information(serialnum), filename)
 
-        return
+        return files
 
                 
 
