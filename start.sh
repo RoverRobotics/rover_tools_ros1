@@ -2,6 +2,7 @@
 sudo apt-get update
 sudo apt-get install python3-pip -y
 sudo apt-get install screen -y
+sudo apt-get install nano -y
 pip3 install console-menu
 pip3 install boto3
 pip3 install pexpect
