@@ -57,11 +57,11 @@ class ManufacturingRecordDb():
             print("Serial Number %s not found in registration db." % serial_number)
             return None
         
-        print("ROBOT INFORMATION FOR SERIAL %s" % response['Item']['SerialNumber'])
-        for key, value in response['Item'].items():
-            if 'SerialNumber' in key:
-                continue
-            print(key, value)
+        # print("ROBOT INFORMATION FOR SERIAL %s" % response['Item']['SerialNumber'])
+        # for key, value in response['Item'].items():
+        #     if 'SerialNumber' in key:
+        #         continue
+        #     print(key, value)
 
         return response['Item']
 
@@ -232,7 +232,11 @@ class ManufacturingRecordDb():
                         self.s3.download_file("rr-mfg-test-logs", "log_" + serialnum + ".json", filename)
                 elif entry == "registration":
                     with open(filename, "w") as f:
-                        json.dump(self.get_robot_information(serialnum), filename)
+                        json.dump(
+                            self.get_robot_information(serialnum), 
+                            f,
+                            indent=4
+                        )
 
         return files
 
