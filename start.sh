@@ -7,6 +7,8 @@ pip3 install console-menu
 pip3 install boto3
 pip3 install pexpect
 cp -r ../rover_tools ~/
-python3 ~/rover_tools/menu/menu_main.py
+cwd=$(pwd)
+cf="${cwd}/../credentials.json"
+python3 ~/rover_tools/menu/menu_main.py --cf ${cf}
 source /opt/ros/melodic/setup.bash
 source ~/catkin_ws/devel/setup.bash
