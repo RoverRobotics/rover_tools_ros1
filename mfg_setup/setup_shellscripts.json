@@ -30,13 +30,13 @@
             ]
         }
     ,
-    "zero_2WD_ros1": 
+    "zero2_2WD_ros1": 
         {
             "mfg_mode": [
                 "sudo systemctl stop roverrobotics",
                 "killall roslaunch",
                 "source ~/catkin_ws/devel/setup.bash",
-                "screen -dm bash -c \"roslaunch rr_rover_zero_v2_driver mfg_zero_2_2WD.launch\""
+                "screen -dm bash -c \"roslaunch roverrobotics_driver mfg_zero2_2WD.launch\""
             ],
             "normal_mode": [
                 "killall roslaunch",
@@ -46,13 +46,13 @@
             ]
         }
     ,
-    "zero_4WD_ros1": 
+    "zero2_4WD_ros1": 
         {
             "mfg_mode": [
                 "sudo systemctl stop roverrobotics",
                 "killall roslaunch",
                 "source ~/catkin_ws/devel/setup.bash",
-                "screen -dm bash -c \"roslaunch rr_rover_zero_v2_driver mfg_zero_2_4WD.launch\""
+                "screen -dm bash -c \"roslaunch roverrobotics_driver mfg_zero2_4WD.launch\""
             ],
             "normal_mode": [
                 "killall roslaunch",

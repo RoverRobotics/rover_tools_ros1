@@ -1,8 +1,8 @@
 {
     "pro_2WD_ros1": [],
     "pro_4WD_ros1": [],
-    "zero_2WD_ros1": [],
-    "zero_4WD_ros1": [],
+    "zero2_2WD_ros1": [],
+    "zero2_4WD_ros1": [],
     "mini_ros1": [],
     "pro2_ros1": []
 }
