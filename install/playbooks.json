@@ -13,13 +13,13 @@
         "setup_launch_pro",
         "start_rover_ros1_services"
     ],
-    "zero_ros1": [
+    "zero2_ros1": [
         "uninstall_scripts",
         "prereq",
         "rover_ros_subsystem_files",
-        "rover_stack",
         "ds4",
         "rover_udev",
+        "roverrobotics_ros1",
         "rpilidar_repo",
         "rover_test_repo",
         "catkin_make",

@@ -307,8 +307,6 @@
             "create_udev": [
                 "cat << EOF8 | sudo tee /etc/udev/rules.d/55-roverrobotics.rules",
                 "#creates fixed name for rover serial communication",
-                "#rover zero",
-                "KERNEL==\"ttyACM*\", ATTRS{idVendor}==\"03eb\", ATTRS{idProduct}==\"2404\", MODE:=\"0777\", SYMLINK+=\"rover-zero\" ",
                 "#rover zero v2",
                 "KERNEL==\"ttyUSB[0-9]\", ATTRS{idVendor}==\"0403\", ATTRS{serial}==\"Rover Zero 2\", MODE:=\"0777\", SYMLINK+=\"rover-zero-v2\", RUN+=\"/bin/setserial /dev/%k low_latency\" ",
                 "# rover pro",
@@ -322,21 +320,6 @@
                 "    echo \"create_udev: Failure\" >> $KEY_VERIFICATION_FILE",
                 "fi"
 
-            ]
-        }
-    ],
-    "rover_stack": [
-        {
-            "download_rover_stack": [
-                "mkdir -p ~/catkin_ws/src",
-                "cd ~/catkin_ws/src/",
-                "git clone $KEY_ROVER_STACK $KEYV_ROVER_STACK",
-                "if [ -d ~/catkin_ws/src/$KEYV_ROVER_STACK ]",
-                "then",
-                "    echo \"download_rover_stack: Success\" >> $KEY_VERIFICATION_FILE",
-                "else",
-                "    echo \"download_rover_stack: Failure\" >> $KEY_VERIFICATION_FILE",
-                "fi"
             ]
         }
     ],
