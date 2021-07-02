@@ -5,7 +5,7 @@
     "$KEYV_DS4_DRV": "ds4drv",
     "$KEY_ROVER_TESTS": "https://github.com/RoverRobotics/robottests -b main",
     "$KEYV_ROVER_TESTS": "robottests",
-    "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.1.0",
+    "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.1.1",
     "$KEYV_ROVER_ROS1": "roverrobotics_ros1",
     "$KEY_RPI_ROS": "https://github.com/Slamtec/rplidar_ros.git",
     "$KEYV_RPI_ROS": "rplidar_ros",
