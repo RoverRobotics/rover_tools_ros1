@@ -6,7 +6,8 @@ sudo apt-get install nano -y
 pip3 install console-menu
 pip3 install boto3
 pip3 install pexpect
-cp -r ../rover_tools ~/
+cp -rf ../rover_tools ~/
+git clone https://github.com/roverrobotics/robottests ~/rover_tools/testing/robottests/
 cwd=$(pwd)
 cf="${cwd}/../credentials.json"
 python3 ~/rover_tools/menu/menu_main.py --cf ${cf}
