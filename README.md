@@ -23,7 +23,7 @@ cd ~/rover_tools
 ## Menu Options
 
 <ol>
-  <1i>Install
+  <li>Install
     <ol>
     <li>pro_ros1</li>
     <li>zero2_ros1</li>
