@@ -22,16 +22,12 @@ cd ~/rover_tools
 
 ## Menu Options
 
-Install<br>
-
-<ol>
-<li>pro_ros1</li>
-<li>zero2_ros1</li>
-<li>mini_ros1</li>
-<li>pro2_ros1</li>
-<li>Return to Rover Tools</li>
-</ol>
-
+Install
+  1 - pro_ros1
+  2 - zero2_ros1
+  3 - mini_ros1
+  4 - pro2_ros1
+  5 - Return to Rover Tools
 Calibrate
   1 - pro_2WD_ros1
   2 - pro_4WD_ros1
