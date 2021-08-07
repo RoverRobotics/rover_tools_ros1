@@ -57,4 +57,14 @@ cd ~/rover_tools
   <li>Exit</li>
 </ol>
 
-Follow the prompts to achieve your goal, whether it be installing software or testing your robot.
+# Troubleshooting
+If the install script has failed, view the detailed log by running the following command
+
+```
+cat ~/rr-install-verification.file
+```
+
+Here is a sample output of a failure <br>
+![image](https://user-images.githubusercontent.com/6597441/128610405-4e99d424-48ff-4ce5-9775-ebf714dda4d8.png)
+
+You can then look in rover_tools/install/shellscripts.json to view the command that caused the failure
