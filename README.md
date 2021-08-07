@@ -22,7 +22,7 @@ cd ~/rover_tools
 
 ## Menu Options
 
-Install<br>
+1. Install<br>
 
 <ol>
 <li>pro_ros1</li>
@@ -32,7 +32,7 @@ Install<br>
 <li>Return to Rover Tools</li>
 </ol>
 
-Calibrate<br>
+2. Calibrate<br>
 
 <ol>
 <li>pro_2WD_ros1</li>
@@ -44,7 +44,7 @@ Calibrate<br>
 <li>Return to Rover Tools</li>
 </ol>
   
-Test<br>
+3. Test<br>
 
 <ol>
 <li>pro_2WD_ros1</li>
@@ -56,6 +56,6 @@ Test<br>
 <li>Return to Rover Tools</li>
 </ol>
 
-Exit
+4. Exit
 
 Follow the prompts to achieve your goal, whether it be installing software or testing your robot.
