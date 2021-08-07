@@ -1,8 +1,8 @@
 This repository follows semantic versioning rules. Versions have three numbers seperated by periods [e.g. 1.0.0]
 
-Major Version [X.O.O] - Non-backwards compatible [Feature] added <br>
-Minor Version [O.X.O] - Backwards compatible [Feature] added <br>
-Patch Version [O.O.X] - Only [Fix]'s added <br>
+Major Version [X.O.O] - Non-backwards compatible [Feature] added
+Minor Version [O.X.O] - Backwards compatible [Feature] added
+Patch Version [O.O.X] - Only [Fix]'s added
 
 
 # 1.0.0
