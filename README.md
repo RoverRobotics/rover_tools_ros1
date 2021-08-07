@@ -22,39 +22,40 @@ cd ~/rover_tools
 
 ## Menu Options
 
+1. Install<br>
+
 <ol>
-  <1i>Install
-    <ol>
-    <li>pro_ros1</li>
-    <li>zero2_ros1</li>
-    <li>mini_ros1</li>
-    <li>pro2_ros1</li>
-    <li>Return to Rover Tools</li>
-    </ol>
-  </li>
-  <li>Calibrate
-    <ol>
-    <li>pro_2WD_ros1</li>
-    <li>pro_4WD_ros1</li>
-    <li>zero2_2WD_ros1</li>
-    <li>zero2_4WD_ros1</li>
-    <li>pro2_2WD_ros1</li>
-    <li>mini_2WD_ros1</li>
-    <li>Return to Rover Tools</li>
-    </ol>
-  </li>
-  <li>Test
-    <ol>
-    <li>pro_2WD_ros1</li>
-    <li>pro_4WD_ros1</li>
-    <li>zero2_2WD_ros1</li>
-    <li>zero2_4WD_ros1</li>
-    <li>pro2_2WD_ros1</li>
-    <li>mini_2WD_ros1</li>
-    <li>Return to Rover Tools</li>
-    </ol>
-  </li>
-  <li>Exit</li>
+<li>pro_ros1</li>
+<li>zero2_ros1</li>
+<li>mini_ros1</li>
+<li>pro2_ros1</li>
+<li>Return to Rover Tools</li>
 </ol>
+
+2. Calibrate<br>
+
+<ol>
+<li>pro_2WD_ros1</li>
+<li>pro_4WD_ros1</li>
+<li>zero2_2WD_ros1</li>
+<li>zero2_4WD_ros1</li>
+<li>pro2_2WD_ros1</li>
+<li>mini_2WD_ros1</li>
+<li>Return to Rover Tools</li>
+</ol>
+  
+3. Test<br>
+
+<ol>
+<li>pro_2WD_ros1</li>
+<li>pro_4WD_ros1</li>
+<li>zero2_2WD_ros1</li>
+<li>zero2_4WD_ros1</li>
+<li>pro2_2WD_ros1</li>
+<li>mini_2WD_ros1</li>
+<li>Return to Rover Tools</li>
+</ol>
+
+4. Exit
 
 Follow the prompts to achieve your goal, whether it be installing software or testing your robot.
