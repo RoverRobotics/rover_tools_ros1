@@ -14,6 +14,6 @@ Initial Release
 
 
 # 1.0.2
-[Fix] - Issue #7 <br>
-[Fix] - Issue #8 <br>
-[Fix] - Issue #9 <br>
+[Fix] - Issue #7
+[Fix] - Issue #8
+[Fix] - Issue #9
