@@ -13,8 +13,7 @@ Initial Release
 [Fix] - Update driver version from 3.1.0 to 3.1.1 to change Rover Pro port name from 'rover' to 'rover-pro' to match Udev in rover_tools/install/shellscripts.json
 
 
-
 # 1.0.2
-[Fix] - Made it easier to start program by splitting start.sh into **install.sh** and **start.sh**
-[Fix] - Fix issue #8
-[Fix] - Fix issue #9
+[Fix] - Issue #7
+[Fix] - Issue #8
+[Fix] - Issue #9
