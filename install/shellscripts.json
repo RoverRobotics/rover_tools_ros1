@@ -365,7 +365,8 @@
     ],
     "uninstall_scripts": [
         {
-            "remove-catkin_ws": 
+            "remove-catkin_ws": [
+                "sudo apt-get remove net-tools openssh-server -y",
                 "sed -i '/melodic/d' ~/.bashrc",
                 "sed -i '/catkin_ws/d' ~/.bashrc",
                 "sudo mv ~/catkin_ws/ ~/catkin_ws_old/",
