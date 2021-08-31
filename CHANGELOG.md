@@ -15,6 +15,6 @@ Initial Release
 
 
 # 1.0.2
-[Fix] - Added this changelog
-[Fix] - Made it easier to start program by splitting start.sh into **install.sh** and **start.sh**
-[Fix] - Removed an undesirable uninstall step (uninstalling openssh server)
+[Fix] - Added this changelog  
+[Fix] - Made it easier to start program by splitting start.sh into **install.sh** and **start.sh**  
+[Fix] - Removed an undesirable uninstall step (uninstalling openssh server)  
