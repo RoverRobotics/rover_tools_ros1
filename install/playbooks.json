@@ -13,6 +13,18 @@
         "setup_launch_pro",
         "start_rover_ros1_services"
     ],
+    "pro_ros1_noetic": [
+        "uninstall_scripts",
+        "prereq_noetic",
+        "rover_ros_subsystem_files_noetic",
+        "rover_udev",
+        "roverrobotics_ros1",
+        "rover_test_repo",
+        "catkin_make_noetic",
+        "rover_startup_script",
+        "setup_launch_pro",
+        "start_rover_ros1_services_noetic"
+    ],
     "zero2_ros1": [
         "uninstall_scripts",
         "prereq",
