@@ -42,26 +42,29 @@ else:
 
 # build GUI below ..............
 
-# serial number
+# serial number (removed)
 if launch_production_menu:
-    menu.append_item(build_serial_number_function(mfgdb))
+    pass
+    #menu.append_item(build_serial_number_function(mfgdb))
 
-# inspection
+# inspection (removed)
 if launch_production_menu:
-    menu.append_item(build_inspection_submenu(menu, mfgdb))
+    pass
+    #menu.append_item(build_inspection_submenu(menu, mfgdb))
 
 # installation
 menu.append_item(build_install_submenu(menu, mfgdb))
 
-# calibration
-menu.append_item(build_calibration_submenu(menu, mfgdb))
+# calibration (removed)
+#menu.append_item(build_calibration_submenu(menu, mfgdb))
 
 # testing
 menu.append_item(build_testing_submenu(menu, mfgdb))
 
-# device registration
+# device registration (removed)
 if launch_production_menu:
-    menu.append_item(build_device_registration_function(mfgdb))
+    pass
+    #menu.append_item(build_device_registration_function(mfgdb))
 
 if launch_production_menu:
     menu.append_item(build_records_submenu(menu, mfgdb))

@@ -98,9 +98,9 @@ class ManufacturingRecordDb():
 
         return True
 
-    def publish_test_log(self, logfile_path:str, serial_number:str):
+    def publish_test_log(self, logfile_path:str, serial_number:str, format=".json"):
         try:
-            response = self.s3.upload_file(logfile_path, "rr-mfg-test-logs", "log_" + serial_number + ".json")
+            response = self.s3.upload_file(logfile_path, "rr-mfg-test-logs", "log_" + serial_number + format)
             print(response)
         except Exception as e:
             print('Failed to publish log %s' % e)

@@ -18,6 +18,11 @@ def build_testing_submenu(menu, mfgdb=None):
                         device_serial_number = input("Enter serial number: ")
                         if not mfgdb.publish_test_log(os.path.dirname(__file__) + "/../testing/testing_log.json", device_serial_number):
                             input('Failed to publish results to cloud. Contact your system administrator.')
+                        if not mfgdb.publish_test_log(
+                            os.path.dirname(__file__) + "/../testing/robottests/unittest.log", "utestdebug_" + device_serial_number,
+                            format=".log"
+                        ):
+                            input('Failed to publish results to cloud. Contact your system administrator.')
                     else:
                         input("Did not publish results to cloud. Push Enter to continue.")
             else:
