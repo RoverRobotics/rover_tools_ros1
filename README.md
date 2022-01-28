@@ -8,7 +8,7 @@ The first time you run rover tools run these commands to install necessary depen
 
 ```
 cd ~/
-git clone https://github.com/roverrobotics/rover_tools -b 1.0.2
+git clone https://github.com/roverrobotics/rover_tools -b 1.1.1
 cd ~/rover_tools
 ./install.sh
 ```
