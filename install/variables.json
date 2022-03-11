@@ -1,5 +1,5 @@
 {
-    "$KEY_LIBROVER": "https://github.com/roverrobotics/librover -b 3.1.1",
+    "$KEY_LIBROVER": "https://github.com/roverrobotics/librover -b 3.2.1",
     "$KEYV_LIBROVER": "librover",
     "$KEY_DS4_DRV": "https://github.com/naoki-mizuno/ds4drv --branch devel",
     "$KEYV_DS4_DRV": "ds4drv",
