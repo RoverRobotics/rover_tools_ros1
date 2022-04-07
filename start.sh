@@ -1,11 +1,13 @@
 #!/bin/bash
 sudo apt-get update
+sudo apt-get install python pip -y
 sudo apt-get install python3-pip -y
 sudo apt-get install screen -y
 sudo apt-get install nano -y
 pip3 install console-menu
 pip3 install boto3
 pip3 install pexpect
+pip install six
 cp -rf ../rover_tools ~/
 git clone https://github.com/roverrobotics/robottests ~/rover_tools/testing/robottests/
 cwd=$(pwd)
