@@ -262,33 +262,6 @@
             ]
         }
     ],
-    "setup_launch_pro2": [
-        {
-            "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep \"$KEY_PRO2_LAUNCH\" /usr/sbin/roverrobotics",
-                "then",
-                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
-                "else",
-                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
-                "fi"
-            ]
-        }
-    ],
-    "setup_launch_mini": [
-        {
-            "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep \"$KEY_MINI_LAUNCH\" /usr/sbin/roverrobotics",
-                "then",
-                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
-                "else",
-                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
-                "fi"
-                
-            ]
-        }
-    ],
     "setup_launch_zero2": [
         {
             "replace_launch_file": [
