@@ -8,7 +8,7 @@ The first time you run rover tools run these commands to install necessary depen
 
 ```
 cd ~/
-git clone https://github.com/roverrobotics/rover_tools -b 1.1.1
+git clone https://github.com/roverrobotics/rover_tools -b 1.1.3
 cd ~/rover_tools
 ./install.sh
 ```
@@ -27,8 +27,6 @@ cd ~/rover_tools
     <ol>
     <li>pro_ros1</li>
     <li>zero2_ros1</li>
-    <li>mini_ros1</li>
-    <li>pro2_ros1</li>
     <li>Return to Rover Tools</li>
     </ol>
   </li>
@@ -38,8 +36,6 @@ cd ~/rover_tools
     <li>pro_4WD_ros1</li>
     <li>zero2_2WD_ros1</li>
     <li>zero2_4WD_ros1</li>
-    <li>pro2_2WD_ros1</li>
-    <li>mini_2WD_ros1</li>
     <li>Return to Rover Tools</li>
     </ol>
   </li>
@@ -49,8 +45,6 @@ cd ~/rover_tools
     <li>pro_4WD_ros1</li>
     <li>zero2_2WD_ros1</li>
     <li>zero2_4WD_ros1</li>
-    <li>pro2_2WD_ros1</li>
-    <li>mini_2WD_ros1</li>
     <li>Return to Rover Tools</li>
     </ol>
   </li>
