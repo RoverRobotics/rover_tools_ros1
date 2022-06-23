@@ -26,33 +26,5 @@
         "rover_startup_script",
         "setup_launch_zero2",
         "start_rover_ros1_services"
-    ],
-    "mini_ros1": [
-        "uninstall_scripts",
-        "prereq",
-        "rover_ros_subsystem_files",
-        "ds4",
-        "roverrobotics_ros1",
-        "can_service",
-        "rpilidar_repo",
-        "rover_test_repo",
-        "catkin_make",
-        "rover_startup_script",
-        "setup_launch_mini",
-        "start_rover_ros1_services"
-    ],
-    "pro2_ros1": [
-        "uninstall_scripts",
-        "prereq",
-        "rover_ros_subsystem_files",
-        "ds4",
-        "roverrobotics_ros1",
-        "can_service",
-        "rpilidar_repo",
-        "rover_test_repo",
-        "catkin_make",
-        "rover_startup_script",
-        "setup_launch_mini",
-        "start_rover_ros1_services"
     ]
 }
