@@ -262,33 +262,6 @@
             ]
         }
     ],
-    "setup_launch_pro2": [
-        {
-            "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep \"$KEY_PRO2_LAUNCH\" /usr/sbin/roverrobotics",
-                "then",
-                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
-                "else",
-                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
-                "fi"
-            ]
-        }
-    ],
-    "setup_launch_mini": [
-        {
-            "replace_launch_file": [
-                "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics",
-                "if grep \"$KEY_MINI_LAUNCH\" /usr/sbin/roverrobotics",
-                "then",
-                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
-                "else",
-                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
-                "fi"
-                
-            ]
-        }
-    ],
     "setup_launch_zero2": [
         {
             "replace_launch_file": [
@@ -374,7 +347,7 @@
                 "sudo rm -rf ~/.local/bin/ds4drv",
                 "sudo rm -rf /etc/udev/rules.d/50-ds4drv.rules #ps4 udev",
                 "sudo rm -rf /etc/udev/rules.d/55-roverrobotics.rules #rover udev",
-                "sudo rm -rf ~/rover_tools/testing/$KEYV_ROVER_TESTS #robot test",
+                "sudo rm -rf ~/rover_tools_ros1/testing/$KEYV_ROVER_TESTS #robot test",
                 "sudo rm -rf /etc/roverrobotics #env",
                 "sudo rm -rf /usr/sbin/roverrobotics #selector",
                 "sudo rm -rf /etc/systemd/system/roscore.service #ros service",
