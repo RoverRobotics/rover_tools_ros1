@@ -9,7 +9,7 @@ pip3 install boto3
 pip3 install pexpect
 pip install six
 cp -rf ../rover_tools_ros1 ~/
-git clone https://github.com/roverrobotics/robottests ~/rover_tools/testing/robottests/
+git clone https://github.com/roverrobotics/robottests ~/rover_tools_ros1/testing/robottests/
 cwd=$(pwd)
 cf="${cwd}/../credentials.json"
 python3 ~/rover_tools_ros1/menu/menu_main.py --cf ${cf}
