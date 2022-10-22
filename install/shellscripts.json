@@ -7,7 +7,7 @@
                 "sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654",
                 "sudo apt-get update"
             ],
-            "install-utils": "sudo apt-get install git nano net-tools openssh-server ros-melodic-desktop python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential ros-melodic-serial ros-melodic-joy ros-melodic-twist-mux ros-melodic-tf2-geometry-msgs ros-melodic-robot-localization ros-melodic-gmapping ros-melodic-move-base -y",
+            "install-utils": "sudo apt-get install git nano net-tools openssh-server ros-noetic-desktop python-rosdep python-rosinstall python-rosinstall-generator python-wstool build-essential ros-noetic-serial ros-noetic-joy ros-noetic-twist-mux ros-noetic-tf2-geometry-msgs ros-noetic-robot-localization ros-noetic-gmapping ros-noetic-move-base -y",
             "remove-modemmanger": "sudo apt-get remove modemmanager -y",
             "update-ros-dept": [
                 "sudo rosdep init",
@@ -38,7 +38,7 @@
                 "[Service]",
                 "Type=forking",
                 "User=$USER",
-                " ExecStart=/bin/sh -c \". /opt/ros/melodic/setup.sh; . /etc/roverrobotics/env.sh; roscore & while ! echo exit | nc localhost 11311 > /dev/null; do sleep 1; done\" ",
+                " ExecStart=/bin/sh -c \". /opt/ros/noetic/setup.sh; . /etc/roverrobotics/env.sh; roscore & while ! echo exit | nc localhost 11311 > /dev/null; do sleep 1; done\" ",
                 "[Install]",
                 "WantedBy=multi-user.target",
                 "EOF2",
@@ -91,8 +91,8 @@
                 "cd ~/drivers",
                 "git clone $KEY_DS4_DRV ds4drv",
                 "cd ds4drv",
-                "mkdir -p ~/.local/lib/python2.7/site-packages",
-                "python2 setup.py install --prefix ~/.local",
+                "mkdir -p ~/.local/lib/python3.7/site-packages",
+                "python3 setup.py install --prefix ~/.local",
                 "sudo cp -rf udev/50-ds4drv.rules /etc/udev/rules.d/",
                 "sudo udevadm control --reload-rules && sudo udevadm trigger",
                 "if [ -f ~/.local/bin/ds4drv ]",
@@ -262,11 +262,50 @@
             ]
         }
     ],
+    "setup_launch_pro2": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_PRO2_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if grep \"$KEY_PRO2_LAUNCH\" /usr/sbin/roverrobotics",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+            ]
+        }
+    ],
     "setup_launch_zero2": [
         {
             "replace_launch_file": [
                 "sudo sed -i 's/placeholder/$KEY_ZERO2_LAUNCH/g' /usr/sbin/roverrobotics",
                 "if grep \"$KEY_ZERO2_LAUNCH\" /usr/sbin/roverrobotics",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+            ]
+        }
+    ],
+    "setup_launch_mini": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_MINI_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if grep \"$KEY_MINI_LAUNCH\" /usr/sbin/roverrobotics",
+                "then",
+                "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
+                "else",
+                "    echo \"replace_launch_file: Failure\" >> $KEY_VERIFICATION_FILE",
+                "fi"
+            ]
+        }
+    ],
+    "setup_launch_miti": [
+        {
+            "replace_launch_file": [
+                "sudo sed -i 's/placeholder/$KEY_MITI_LAUNCH/g' /usr/sbin/roverrobotics",
+                "if grep \"$KEY_MITI_LAUNCH\" /usr/sbin/roverrobotics",
                 "then",
                 "    echo \"replace_launch_file: Success\" >> $KEY_VERIFICATION_FILE",
                 "else",
@@ -304,9 +343,9 @@
                 "cd ~/catkin_ws",
                 "rosdep install --from-paths src --ignore-src -r -y",
                 "echo source ~/catkin_ws/devel/setup.bash >> ~/.bashrc",
-                "echo source /opt/ros/melodic/setup.bash >> ~/.bashrc",
+                "echo source /opt/ros/noetic/setup.bash >> ~/.bashrc",
                 "source ~/.bashrc",
-                "source /opt/ros/melodic/setup.bash",
+                "source /opt/ros/noetic/setup.bash",
                 "catkin_make"
             ]
         }
@@ -314,7 +353,7 @@
     "start_rover_ros1_services": [
         {
             "start_roscore_service": [
-                "source /opt/ros/melodic/setup.bash",
+                "source /opt/ros/noetic/setup.bash",
                 "source ~/catkin_ws/devel/setup.bash",
                 "sudo systemctl start roscore.service",
                 "if sudo systemctl status roscore.service | grep -i running",
@@ -326,7 +365,7 @@
                 
             ],
             "start_roverrobotics_service": [
-                "source /opt/ros/melodic/setup.bash",
+                "source /opt/ros/noetic/setup.bash",
                 "source ~/catkin_ws/devel/setup.bash",
                 "sudo systemctl start roverrobotics.service",
                 "if sudo systemctl status roverrobotics.service | grep -i running",
@@ -341,11 +380,11 @@
     "uninstall_scripts": [
         {
             "remove-catkin_ws": [
-                "sed -i '/melodic/d' ~/.bashrc",
+                "sed -i '/noetic/d' ~/.bashrc",
                 "sed -i '/catkin_ws/d' ~/.bashrc",
                 "sudo mv ~/catkin_ws/ ~/catkin_ws_old/",
                 "sudo rm -rf ~/drivers #librover and ps4 driver",
-                "sudo rm -rf ~/.local/lib/python2.7/site-packages/ds4drv-0.5.1-py2.7.egg #installed ps4 driver",
+                "sudo rm -rf ~/.local/lib/python3.7/site-packages/ds4drv-0.5.1-py2.7.egg #installed ps4 driver",
                 "sudo rm -rf ~/.local/bin/ds4drv",
                 "sudo rm -rf /etc/udev/rules.d/50-ds4drv.rules #ps4 udev",
                 "sudo rm -rf /etc/udev/rules.d/55-roverrobotics.rules #rover udev",

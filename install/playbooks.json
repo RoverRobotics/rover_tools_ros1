@@ -13,6 +13,21 @@
         "setup_launch_pro",
         "start_rover_ros1_services"
     ],
+    "pro2_ros1": [
+        "uninstall_scripts",
+        "prereq",
+        "rover_ros_subsystem_files",
+        "ds4",
+        "rover_udev",
+        "roverrobotics_ros1",
+        "rpilidar_repo",
+        "rover_test_repo",
+        "catkin_make",
+        "can_service",
+        "rover_startup_script",
+        "setup_launch_pro2",
+        "start_rover_ros1_services"
+    ],
     "zero2_ros1": [
         "uninstall_scripts",
         "prereq",
@@ -25,6 +40,36 @@
         "catkin_make",
         "rover_startup_script",
         "setup_launch_zero2",
+        "start_rover_ros1_services"
+    ],
+    "mini_ros1": [
+        "uninstall_scripts",
+        "prereq",
+        "rover_ros_subsystem_files",
+        "ds4",
+        "rover_udev",
+        "roverrobotics_ros1",
+        "rpilidar_repo",
+        "rover_test_repo",
+        "catkin_make",
+        "can_service",
+        "rover_startup_script",
+        "setup_launch_mini",
+        "start_rover_ros1_services"
+    ],
+    "miti_ros1": [ 
+        "uninstall_scripts",
+        "prereq",
+        "rover_ros_subsystem_files",
+        "ds4",
+        "rover_udev",
+        "roverrobotics_ros1",
+        "rpilidar_repo",
+        "rover_test_repo",
+        "catkin_make",
+        "can_service",
+        "rover_startup_script",
+        "setup_launch_miti",
         "start_rover_ros1_services"
     ]
 }

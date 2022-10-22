@@ -1,17 +1,20 @@
 {
-    "$KEY_LIBROVER": "https://github.com/roverrobotics/librover -b 3.2.1",
+    "$KEY_LIBROVER": "https://github.com/roverrobotics/librover -b release",
     "$KEYV_LIBROVER": "librover",
     "$KEY_DS4_DRV": "https://github.com/naoki-mizuno/ds4drv --branch devel",
     "$KEYV_DS4_DRV": "ds4drv",
     "$KEY_ROVER_TESTS": "https://github.com/RoverRobotics/robottests -b main",
     "$KEYV_ROVER_TESTS": "robottests",
-    "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b 3.1.3",
+    "$KEY_ROVER_ROS1": "https://github.com/RoverRobotics/roverrobotics_ros1.git -b release",
     "$KEYV_ROVER_ROS1": "roverrobotics_ros1",
     "$KEY_RPI_ROS": "https://github.com/Slamtec/rplidar_ros.git",
     "$KEYV_RPI_ROS": "rplidar_ros",
-    "$KEY_DS4_ROS": "https://github.com/naoki-mizuno/ds4_driver -b melodic-devel",
+    "$KEY_DS4_ROS": "https://github.com/naoki-mizuno/ds4_driver -b noetic-devel",
     "$KEYV_DS4_ROS": "ds4_driver",
     "$KEY_PRO_LAUNCH": "roverrobotics_driver pro_teleop.launch",
+    "$KEY_PRO2_LAUNCH": "roverrobotics_driver pro2_teleop.launch",
+    "$KEY_MINI_LAUNCH": "roverrobotics_driver mini_teleop.launch",
+    "$KEY_MITI_LAUNCH": "roverrobotics_driver miti_teleop.launch",
     "$KEY_ZERO2_LAUNCH": "roverrobotics_driver zero2_teleop.launch",
     "$KEY_VERIFICATION_FILE": "~/rr-install-verification.file"
     
