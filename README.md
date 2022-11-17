@@ -1,6 +1,6 @@
 # rover_tools
 
-Rover Tools are a new set of tools to help users quickly and easily install the required software to run a Rover robot. Rover tools are targetted for provisioning Ubuntu.
+Rover Tools are a new set of tools to help users quickly and easily install the required software to run a Rover robot. Rover tools are targeted for Ubuntu 20.04 LTS.
 
 # install
 
