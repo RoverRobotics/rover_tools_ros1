@@ -4,6 +4,7 @@ sudo apt-get install python-pip -y
 sudo apt-get install python3-pip -y
 sudo apt-get install screen -y
 sudo apt-get install nano -y
+sudo apt install cmake -y
 sudo apt install git -y 
 sudo apt install nano -y
 sudo apt install net-tools -y
