@@ -19,5 +19,5 @@ git clone https://github.com/roverrobotics/robottests ~/rover_tools_ros1/testing
 cwd=$(pwd)
 cf="${cwd}/../credentials.json"
 python3 ~/rover_tools_ros1/menu/menu_main.py --cf ${cf}
-source /opt/ros/melodic/setup.bash
+source /opt/ros/noetic/setup.bash
 source ~/catkin_ws/devel/setup.bash
