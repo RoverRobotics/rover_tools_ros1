@@ -9,14 +9,14 @@ The first time you run rover tools run these commands to install necessary depen
 ```
 cd ~/
 git clone https://github.com/roverrobotics/rover_tools_ros1
-cd ~/rover_tools
-./install.sh
+cd ~/rover_tools_ros1
+./start.sh
 ```
 
 # usage
 
 ```
-cd ~/rover_tools
+cd ~/rover_tools_ros1
 ./start.sh
 ```
 
