@@ -20,6 +20,8 @@ cd ~/rover_tools_ros1
 ./start.sh
 ```
 
+** To install the mini or MĪTI version you will need to power on your robot and connect it to the computer running the script via the USB cable. **
+
 ## Menu Options
 
 <ol>
