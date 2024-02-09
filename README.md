@@ -1,6 +1,6 @@
 # rover_tools
 
-Rover Tools are a new set of tools to help users quickly and easily install the required software to run a Rover robot. Rover tools are targeted for Ubuntu 20.04 LTS.
+Rover Tools are a new set of tools to help users quickly and easily install the required software to run a Rover robot. Rover tools are targeted for Ubuntu 20.04 LTS. You must install ROS Noetic before running the setup script, follow these instructions for the easiest installation - http://wiki.ros.org/ROS/Installation/TwoLineInstall
 
 # install
 
