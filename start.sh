@@ -9,7 +9,6 @@ sudo apt install git -y
 sudo apt install nano -y
 sudo apt install net-tools -y
 sudo apt install openssh-server -y
-sudo apt-get install ros-noetic-desktop python3-rostopic python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential ros-noetic-serial ros-noetic-joy ros-noetic-twist-mux ros-noetic-tf2-geometry-msgs ros-noetic-robot-localization ros-noetic-gmapping ros-noetic-move-base -y
 pip3 install console-menu
 pip3 install boto3
 pip3 install pexpect
